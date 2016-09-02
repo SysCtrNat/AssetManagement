@@ -1,0 +1,216 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ManagementPackFragment SchemaVersion="SM2.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+  <TypeDefinitions>
+    <EntityTypes>
+      <EnumerationTypes>
+        <EnumerationValue ID="AssetManagementLists.Enum.Manufacturer.APC" Accessibility="Public" Parent="AssetManagement!AssetManagement.Manufacturer.Enum" Ordinal="0" />
+        <EnumerationValue ID="AssetManagementLists.Enum.Manufacturer.Cisco" Accessibility="Public" Parent="AssetManagement!AssetManagement.Manufacturer.Enum" Ordinal="1" />
+        <EnumerationValue ID="AssetManagementLists.Enum.Manufacturer.Dell" Accessibility="Public" Parent="AssetManagement!AssetManagement.Manufacturer.Enum" Ordinal="2" />
+        <EnumerationValue ID="AssetManagementLists.Enum.Manufacturer.HP" Accessibility="Public" Parent="AssetManagement!AssetManagement.Manufacturer.Enum" Ordinal="3" />
+        <EnumerationValue ID="AssetManagementLists.Enum.Computer.Model.Latitude.E7440" Accessibility="Public" Parent="AssetManagement!AssetManagement.Computer.Model.Enum" Ordinal="0" />
+        <EnumerationValue ID="AssetManagementLists.Enum.Computer.Model.Surface.V4" Accessibility="Public" Parent="AssetManagement!AssetManagement.Computer.Model.Enum" Ordinal="2" />
+        <EnumerationValue ID="AssetManagementLists.Enum.Suppliers.Dell" Accessibility="Public" Parent="AssetManagement!AssetManagement.Suppliers.Enum" Ordinal="0" />
+        <EnumerationValue ID="AssetManagementLists.Enum.Department.IT" Accessibility="Public" Parent="AssetManagement!AssetManagement.Department.Enum" Ordinal="0" />
+        <EnumerationValue ID="AssetManagementLists.Enum.Region.APAC" Accessibility="Public" Parent="AssetManagement!AssetManagement.Region.Enum" Ordinal="0" />
+        <EnumerationValue ID="AssetManagementLists.Enum.Region.Europe" Accessibility="Public" Parent="AssetManagement!AssetManagement.Region.Enum" Ordinal="1" />
+        <EnumerationValue ID="AssetManagementLists.Enum.Region.NAFTA" Accessibility="Public" Parent="AssetManagement!AssetManagement.Region.Enum" Ordinal="2" />
+        <EnumerationValue ID="AssetManagementLists.Enum.Country.Germany" Accessibility="Public" Parent="AssetManagement!AssetManagement.Country.Enum" Ordinal="0" />
+        <EnumerationValue ID="AssetManagementLists.Enum.Country.Hungary" Accessibility="Public" Parent="AssetManagement!AssetManagement.Country.Enum" Ordinal="1" />
+        <EnumerationValue ID="AssetManagementLists.Enum.Country.USA" Accessibility="Public" Parent="AssetManagement!AssetManagement.Country.Enum" Ordinal="2" />
+        <EnumerationValue ID="AssetManagementLists.Enum.Site.Amsterdam" Accessibility="Public" Parent="AssetManagement!AssetManagement.Site.Enum" Ordinal="0" />
+        <EnumerationValue ID="AssetManagementLists.Enum.Site.Budapest" Accessibility="Public" Parent="AssetManagement!AssetManagement.Site.Enum" Ordinal="1" />
+        <EnumerationValue ID="AssetManagementLists.Enum.Site.Dallas" Accessibility="Public" Parent="AssetManagement!AssetManagement.Site.Enum" Ordinal="2" />
+        <EnumerationValue ID="AssetManagementLists.Enum.Site.Sulzbach" Accessibility="Public" Parent="AssetManagement!AssetManagement.Site.Enum" Ordinal="3" />
+        <EnumerationValue ID="AssetManagementLists.Enum.Site.Suzano" Accessibility="Public" Parent="AssetManagement!AssetManagement.Site.Enum" Ordinal="4" />
+        <EnumerationValue ID="AssetManagementLists.Enum.Computer.Category.Kiosk" Accessibility="Public" Parent="AssetManagement!AssetManagement.Computer.Category.Enum" Ordinal="0" />
+        <EnumerationValue ID="AssetManagementLists.Enum.Computer.Category.Lab" Accessibility="Public" Parent="AssetManagement!AssetManagement.Computer.Category.Enum" Ordinal="1" />
+        <EnumerationValue ID="AssetManagementLists.Enum.Computer.Category.Standard" Accessibility="Public" Parent="AssetManagement!AssetManagement.Computer.Category.Enum" Ordinal="2" />
+        <EnumerationValue ID="AssetManagementLists.Enum.Computer.Type.Desktop" Accessibility="Public" Parent="AssetManagement!AssetManagement.Computer.Type.Enum" Ordinal="0" />
+        <EnumerationValue ID="AssetManagementLists.Enum.Computer.Type.Laptop" Accessibility="Public" Parent="AssetManagement!AssetManagement.Computer.Type.Enum" Ordinal="1" />
+        <EnumerationValue ID="AssetManagementLists.Enum.Computer.Type.Server" Accessibility="Public" Parent="AssetManagement!AssetManagement.Computer.Type.Enum" Ordinal="2" />
+        <EnumerationValue ID="AssetManagementLists.Enum.NetworkInfrastructure.Model.2960" Accessibility="Public" Parent="AssetManagement!AssetManagement.NetworkInfrastructure.Model.Enum" Ordinal="0" />
+        <EnumerationValue ID="AssetManagementLists.Enum.NetworkInfrastructure.Type.Switch" Accessibility="Public" Parent="AssetManagement!AssetManagement.NetworkInfrastructure.Type.Enum" Ordinal="0" />
+      </EnumerationTypes>
+    </EntityTypes>
+  </TypeDefinitions>
+  <Categories>
+    <!--<Category ID="Category.ManagementPackName" Value="EnterpriseManagement!Microsoft.EnterpriseManagement.ServiceManager.ManagementPack">
+      <ManagementPackName>AssetManagementLists</ManagementPackName>
+      <ManagementPackVersion>7.5.3079.0</ManagementPackVersion>
+    </Category>-->
+  </Categories>
+  <Presentation>
+  </Presentation>
+  <LanguagePacks>
+    <LanguagePack ID="ENU" IsDefault="true">
+      <DisplayStrings>
+        <DisplayString ElementID="AssetManagementLists">
+          <Name>AssetManagementLists</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementLists.Enum.Manufacturer.APC">
+          <Name>APC</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementLists.Enum.Manufacturer.Dell">
+          <Name>Dell Inc.</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementLists.Enum.Manufacturer.HP">
+          <Name>Hewlett-Packard</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementLists.Enum.Manufacturer.Cisco">
+          <Name>Cisco</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementLists.Enum.Computer.Model.Latitude.E7440">
+          <Name>Latitude E7440</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementLists.Enum.Computer.Model.Surface.V4">
+          <Name>Surface 4</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementLists.Enum.Suppliers.Dell">
+          <Name>Dell</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementLists.Enum.Department.IT">
+          <Name>IT</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementLists.Enum.Region.APAC">
+          <Name>APAC</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementLists.Enum.Region.Europe">
+          <Name>Europe</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementLists.Enum.Region.NAFTA">
+          <Name>NAFTA</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementLists.Enum.Country.Germany">
+          <Name>Germany</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementLists.Enum.Country.Hungary">
+          <Name>Hungary</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementLists.Enum.Country.USA">
+          <Name>USA</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementLists.Enum.Site.Budapest">
+          <Name>Budapest</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementLists.Enum.Site.Dallas">
+          <Name>Dallas</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementLists.Enum.Site.Sulzbach">
+          <Name>Sulzbach</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementLists.Enum.Site.Suzano">
+          <Name>Suzano</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementLists.Enum.Computer.Category.Kiosk">
+          <Name>Kiosk</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementLists.Enum.Computer.Category.Lab">
+          <Name>Lab</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementLists.Enum.Computer.Category.Standard">
+          <Name>Standard</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementLists.Enum.Computer.Type.Desktop">
+          <Name>Desktop</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementLists.Enum.Computer.Type.Laptop">
+          <Name>Laptop</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementLists.Enum.Computer.Type.Server">
+          <Name>Server</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementLists.Enum.NetworkInfrastructure.Model.2960">
+          <Name>WS-C2960-48PST-L</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementLists.Enum.NetworkInfrastructure.Type.Switch">
+          <Name>Switch</Name>
+        </DisplayString>
+      </DisplayStrings>
+    </LanguagePack>
+    <LanguagePack ID="ENG" IsDefault="false">
+      <DisplayStrings>
+        <DisplayString ElementID="AssetManagementLists">
+          <Name>AssetManagementLists</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementLists.Enum.Manufacturer.APC">
+          <Name>APC</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementLists.Enum.Manufacturer.Dell">
+          <Name>Dell Inc.</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementLists.Enum.Manufacturer.HP">
+          <Name>Hewlett-Packard</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementLists.Enum.Manufacturer.Cisco">
+          <Name>Cisco</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementLists.Enum.Computer.Model.Latitude.E7440">
+          <Name>Latitude E7440</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementLists.Enum.Computer.Model.Surface.V4">
+          <Name>Surface 4</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementLists.Enum.Suppliers.Dell">
+          <Name>Dell</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementLists.Enum.Department.IT">
+          <Name>IT</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementLists.Enum.Region.APAC">
+          <Name>APAC</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementLists.Enum.Region.Europe">
+          <Name>Europe</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementLists.Enum.Region.NAFTA">
+          <Name>NAFTA</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementLists.Enum.Country.Germany">
+          <Name>Germany</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementLists.Enum.Country.Hungary">
+          <Name>Hungary</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementLists.Enum.Country.USA">
+          <Name>USA</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementLists.Enum.Site.Budapest">
+          <Name>Budapest</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementLists.Enum.Site.Dallas">
+          <Name>Dallas</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementLists.Enum.Site.Sulzbach">
+          <Name>Sulzbach</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementLists.Enum.Site.Suzano">
+          <Name>Suzano</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementLists.Enum.Computer.Category.Kiosk">
+          <Name>Kiosk</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementLists.Enum.Computer.Category.Lab">
+          <Name>Lab</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementLists.Enum.Computer.Category.Standard">
+          <Name>Standard</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementLists.Enum.Computer.Type.Desktop">
+          <Name>Desktop</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementLists.Enum.Computer.Type.Laptop">
+          <Name>Laptop</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementLists.Enum.Computer.Type.Server">
+          <Name>Server</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementLists.Enum.NetworkInfrastructure.Model.2960">
+          <Name>WS-C2960-48PST-L</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementLists.Enum.NetworkInfrastructure.Type.Switch">
+          <Name>Switch</Name>
+        </DisplayString>
+      </DisplayStrings>
+    </LanguagePack>
+  </LanguagePacks>
+</ManagementPackFragment>

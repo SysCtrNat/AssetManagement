@@ -1,0 +1,39 @@
+﻿<ManagementPackFragment SchemaVersion="SM2.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Presentation>
+    <Forms>
+      <Form ID="AssetManagementForms.Computer" Assembly="AssetManagementForms.Assembly" Accessibility="Public" Target="ComputerAsset.Form.TypeProjection" TypeName="AssetManagementForms.Computer">
+        <Category>Form</Category>
+      </Form>
+      <Form ID="AssetManagementForms.Computer.Preview" Assembly="AssetManagementForms.Assembly" Accessibility="Public" Target="ComputerAsset.Form.TypeProjection" TypeName="AssetManagementForms.ComputerPreview">
+        <Category>Form</Category>
+      </Form>
+      <Form ID="AssetManagementForms.Peripheral" Assembly="AssetManagementForms.Assembly" Accessibility="Public" Target="Peripheral.Form.TypeProjection" TypeName="AssetManagementForms.Peripheral">
+        <Category>Form</Category>
+      </Form>
+      <Form ID="AssetManagementForms.Peripheral.Preview" Assembly="AssetManagementForms.Assembly" Accessibility="Public" Target="Peripheral.Form.TypeProjection" TypeName="AssetManagementForms.PeripheralPreview">
+        <Category>Form</Category>
+      </Form>
+      <Form ID="AssetManagementForms.NetworkInfraStructureAsset" Assembly="AssetManagementForms.Assembly" Accessibility="Public" Target="NetworkInfraStructureAsset.Form.TypeProjection" TypeName="AssetManagementForms.NetworkInfraStructureAsset">
+        <Category>Form</Category>
+      </Form>
+      <Form ID="AssetManagementForms.NetworkInfraStructureAsset.Preview" Assembly="AssetManagementForms.Assembly" Accessibility="Public" Target="NetworkInfraStructureAsset.Form.TypeProjection" TypeName="AssetManagementForms.NetworkInfraStructureAssetPreview">
+        <Category>Form</Category>
+      </Form>
+      <Form ID="AssetManagementForms.ServerInfraStructureAsset" Assembly="AssetManagementForms.Assembly" Accessibility="Public" Target="ServerInfraStructureAsset.Form.TypeProjection" TypeName="AssetManagementForms.ServerInfraStructureAsset">
+        <Category>Form</Category>
+      </Form>
+      <Form ID="AssetManagementForms.ServerInfraStructureAsset.Preview" Assembly="AssetManagementForms.Assembly" Accessibility="Public" Target="ServerInfraStructureAsset.Form.TypeProjection" TypeName="AssetManagementForms.ServerInfraStructureAssetPreview">
+        <Category>Form</Category>
+      </Form>
+      <Form ID="AssetManagementForms.Order" Assembly="AssetManagementForms.Assembly" Accessibility="Public" Target="Order.TypeProjection" TypeName="AssetManagementForms.Order">
+        <Category>Form</Category>
+      </Form>
+      <Form ID="AssetManagementForms.Order.Preview" Assembly="AssetManagementForms.Assembly" Accessibility="Public" Target="Order.TypeProjection" TypeName="AssetManagementForms.OrderPreview">
+        <Category>Form</Category>
+      </Form>
+    </Forms>
+  </Presentation>
+  <Resources>
+    <Assembly ID="AssetManagementForms.Assembly" Accessibility="Public" FileName="AssetManagementForms.dll" HasNullStream="false" QualifiedName="AssetManagementForms"/>
+  </Resources>
+</ManagementPackFragment>

@@ -1,0 +1,161 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ManagementPack SchemaVersion="2.0" ContentReadable="true" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Manifest>
+    <Identity>
+      <ID>AssetManagementLists</ID>
+      <Version>7.5.3079.1</Version>
+    </Identity>
+    <Name>AssetManagementLists</Name>
+    <References>
+      <Reference Alias="CustomSystem_Library">
+        <ID>System.Library</ID>
+        <Version>7.5.8501.0</Version>
+        <PublicKeyToken>31bf3856ad364e35</PublicKeyToken>
+      </Reference>
+      <Reference Alias="AssetManagement">
+        <ID>AssetManagement</ID>
+        <Version>2.0.0.11</Version>
+        <PublicKeyToken>7d57b1335ea864b0</PublicKeyToken>
+      </Reference>
+    </References>
+  </Manifest>
+  <TypeDefinitions>
+    <EntityTypes>
+      <EnumerationTypes>
+        <EnumerationValue ID="AssetManagementLists.Enum.Manufacturer.APC" Accessibility="Public" Parent="AssetManagement!AssetManagement.Manufacturer.Enum" Ordinal="-1" />
+        <EnumerationValue ID="AssetManagementLists.Enum.Manufacturer.Dell" Accessibility="Public" Parent="AssetManagement!AssetManagement.Manufacturer.Enum" Ordinal="0" />
+        <EnumerationValue ID="AssetManagementLists.Enum.Manufacturer.HP" Accessibility="Public" Parent="AssetManagement!AssetManagement.Manufacturer.Enum" Ordinal="1" />
+        <EnumerationValue ID="AssetManagementLists.Enum.Manufacturer.MS" Accessibility="Public" Parent="AssetManagement!AssetManagement.Manufacturer.Enum" Ordinal="2" />
+        <EnumerationValue ID="AssetManagementLists.Enum.Supplier.Dell" Accessibility="Public" Parent="AssetManagement!AssetManagement.Suppliers.Enum" Ordinal="0" />
+        <EnumerationValue ID="AssetManagementLists.Enum.Model.Ultrabook" Accessibility="Public" Parent="AssetManagement!AssetManagement.Model.Enum" Ordinal="0" />
+        <EnumerationValue ID="AssetManagementLists.Enum.Model.Surface" Accessibility="Public" Parent="AssetManagement!AssetManagement.Model.Enum" Ordinal="1" />
+        <EnumerationValue ID="AssetManagementLists.Enum.Model.Surface.V4" Accessibility="Public" Parent="AssetManagementLists.Enum.Model.Surface" Ordinal="0" />
+        <EnumerationValue ID="Enum.02798869710c4b2e96b3eaf1a0742d94" Accessibility="Public" Parent="AssetManagement!AssetManagement.ComputerType.Enum" Ordinal="0" />
+        <EnumerationValue ID="Enum.7b2a6f25e999406f9d8846e9a8e96db5" Accessibility="Public" Parent="AssetManagement!AssetManagement.ComputerType.Enum" Ordinal="1" />
+        <EnumerationValue ID="Enum.971f61952404421caf0d99ae4693a1bb" Accessibility="Public" Parent="AssetManagement!AssetManagement.ComputerCategory.Enum" Ordinal="1" />
+        <EnumerationValue ID="Enum.68214f81b0474a07b069395e30465266" Accessibility="Public" Parent="AssetManagement!AssetManagement.ComputerCategory.Enum" Ordinal="2" />
+        <EnumerationValue ID="Enum.f3426b0c9f2e40fb973eb9e32f6e080e" Accessibility="Public" Parent="AssetManagement!AssetManagement.ComputerCategory.Enum" Ordinal="2.5" />
+        <EnumerationValue ID="Enum.5c9df3d168a44d4e9dfa0a4134423437" Accessibility="Public" Parent="AssetManagement!AssetManagement.ComputerCategory.Enum" Ordinal="3.5" />
+      </EnumerationTypes>
+    </EntityTypes>
+  </TypeDefinitions>
+  <Presentation>
+    <StringResources>
+      <StringResource ID="AssetStatus.31451165bd7a49898feb4584e7c04979" />
+      <StringResource ID="AssetTag.6624629675634ecf8e848ce0c1e347ec" />
+      <StringResource ID="Category.68f48588ea1d4ee1957ad402e26875b5" />
+      <StringResource ID="DisplayName.c93194048ea54bbb825965d5bcd48a10" />
+      <StringResource ID="EquipmentCost.55ca9d220b134f339119f8e1bc7d77eb" />
+      <StringResource ID="GoodsReceivedDate.a80869de16164de5bb904207226d5b50" />
+      <StringResource ID="Manufacturer.5a63186e4c3649029a3cdea80fcede9a" />
+      <StringResource ID="Model.1a346d14a2dc4e18a6d478d49ae6882c" />
+      <StringResource ID="SerialNumber.f407824e2a52412cac2716109460ac7a" />
+      <StringResource ID="StockLocation.697fe1c6bcbe41749d208f02f4ab517a" />
+      <StringResource ID="Type.3257a46f880542cc963a4003e371c35f" />
+      <StringResource ID="WarrantyExpirationDate.62459b677cd047529d7f07f37aa0a9b3" />
+      <StringResource ID="WarrantySLA.e4de9d3d7bf140589508564c46f16084" />
+    </StringResources>
+  </Presentation>
+  <LanguagePacks>
+    <LanguagePack ID="ENU" IsDefault="true">
+      <DisplayStrings>
+        <DisplayString ElementID="AssetManagementLists">
+          <Name>AssetManagementLists</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementLists.Enum.Manufacturer.APC">
+          <Name>APC</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementLists.Enum.Manufacturer.Dell">
+          <Name>Dell</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementLists.Enum.Manufacturer.HP">
+          <Name>Hewlett Packard</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementLists.Enum.Manufacturer.MS">
+          <Name>Microsoft</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementLists.Enum.Supplier.Dell">
+          <Name>Dell</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementLists.Enum.Model.Ultrabook">
+          <Name>Ultrabook</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementLists.Enum.Model.Surface">
+          <Name>Surface</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementLists.Enum.Model.Surface.V4">
+          <Name>Version 4</Name>
+        </DisplayString>
+        <DisplayString ElementID="Enum.02798869710c4b2e96b3eaf1a0742d94">
+          <Name>PC</Name>
+        </DisplayString>
+        <DisplayString ElementID="Enum.7b2a6f25e999406f9d8846e9a8e96db5">
+          <Name>Server</Name>
+        </DisplayString>
+        <DisplayString ElementID="Enum.971f61952404421caf0d99ae4693a1bb">
+          <Name>Class3</Name>
+        </DisplayString>
+        <DisplayString ElementID="Enum.68214f81b0474a07b069395e30465266">
+          <Name>Kiosk</Name>
+        </DisplayString>
+        <DisplayString ElementID="Enum.f3426b0c9f2e40fb973eb9e32f6e080e">
+          <Name>Lab</Name>
+        </DisplayString>
+        <DisplayString ElementID="Enum.5c9df3d168a44d4e9dfa0a4134423437">
+          <Name>Standard</Name>
+        </DisplayString>
+      </DisplayStrings>
+      <KnowledgeArticles></KnowledgeArticles>
+    </LanguagePack>
+    <LanguagePack ID="ENG" IsDefault="false">
+      <DisplayStrings>
+        <DisplayString ElementID="AssetManagementLists">
+          <Name>AssetManagementLists</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementLists.Enum.Manufacturer.APC">
+          <Name>APC</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementLists.Enum.Manufacturer.Dell">
+          <Name>Dell</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementLists.Enum.Manufacturer.HP">
+          <Name>Hewlett Packard</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementLists.Enum.Manufacturer.MS">
+          <Name>Microsoft</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementLists.Enum.Supplier.Dell">
+          <Name>Dell</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementLists.Enum.Model.Ultrabook">
+          <Name>Ultrabook</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementLists.Enum.Model.Surface">
+          <Name>Surface</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementLists.Enum.Model.Surface.V4">
+          <Name>Version 4</Name>
+        </DisplayString>
+        <DisplayString ElementID="Enum.02798869710c4b2e96b3eaf1a0742d94">
+          <Name>PC</Name>
+        </DisplayString>
+        <DisplayString ElementID="Enum.7b2a6f25e999406f9d8846e9a8e96db5">
+          <Name>Server</Name>
+        </DisplayString>
+        <DisplayString ElementID="Enum.971f61952404421caf0d99ae4693a1bb">
+          <Name>Class3</Name>
+        </DisplayString>
+        <DisplayString ElementID="Enum.68214f81b0474a07b069395e30465266">
+          <Name>Kiosk</Name>
+        </DisplayString>
+        <DisplayString ElementID="Enum.f3426b0c9f2e40fb973eb9e32f6e080e">
+          <Name>Lab</Name>
+        </DisplayString>
+        <DisplayString ElementID="Enum.5c9df3d168a44d4e9dfa0a4134423437">
+          <Name>Standard</Name>
+        </DisplayString>
+      </DisplayStrings>
+      <KnowledgeArticles></KnowledgeArticles>
+    </LanguagePack>
+  </LanguagePacks>
+</ManagementPack>

@@ -1,0 +1,815 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ManagementPack SchemaVersion="2.0" ContentReadable="true" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Manifest>
+    <Identity>
+      <ID>AssetManagement</ID>
+      <Version>2.0.0.12</Version>
+    </Identity>
+    <Name>AssetManagement</Name>
+    <References>
+      <Reference Alias="AssetManagemetListsRef">
+        <ID>AssetManagementLists</ID>
+        <Version>2.0.0.1</Version>
+        <PublicKeyToken>0a39b272096917b0</PublicKeyToken>
+      </Reference>
+      <Reference Alias="Console">
+        <ID>Microsoft.EnterpriseManagement.ServiceManager.UI.Console</ID>
+        <Version>7.5.3079.0</Version>
+        <PublicKeyToken>31bf3856ad364e35</PublicKeyToken>
+      </Reference>
+      <Reference Alias="ConfigurationManager">
+        <ID>Microsoft.SystemCenter.ConfigurationManager</ID>
+        <Version>7.5.3079.0</Version>
+        <PublicKeyToken>31bf3856ad364e35</PublicKeyToken>
+      </Reference>
+      <Reference Alias="Windows">
+        <ID>Microsoft.Windows.Library</ID>
+        <Version>7.5.8501.0</Version>
+        <PublicKeyToken>31bf3856ad364e35</PublicKeyToken>
+      </Reference>
+      <Reference Alias="CoreKnowledge">
+        <ID>System.Knowledge.Library</ID>
+        <Version>7.5.3079.0</Version>
+        <PublicKeyToken>31bf3856ad364e35</PublicKeyToken>
+      </Reference>
+      <Reference Alias="System">
+        <ID>System.Library</ID>
+        <Version>7.5.8501.0</Version>
+        <PublicKeyToken>31bf3856ad364e35</PublicKeyToken>
+      </Reference>
+      <Reference Alias="SupportingItem">
+        <ID>System.SupportingItem.Library</ID>
+        <Version>7.5.3079.0</Version>
+        <PublicKeyToken>31bf3856ad364e35</PublicKeyToken>
+      </Reference>
+      <Reference Alias="WorkItem">
+        <ID>System.WorkItem.Library</ID>
+        <Version>7.5.3079.0</Version>
+        <PublicKeyToken>31bf3856ad364e35</PublicKeyToken>
+      </Reference>
+    </References>
+  </Manifest>
+  <TypeDefinitions>
+    <EntityTypes>
+      <ClassTypes>
+        <ClassType ID="AssetManagementBaseClass" Accessibility="Public" Abstract="true" Base="System!System.ConfigItem" Hosted="false" Singleton="false" Extension="false">
+          <Property ID="AssetID" Type="int" AutoIncrement="true" Key="true" CaseSensitive="false" MaxLength="5" MinLength="1" Required="true" MinValue="1" MaxValue="99999" />
+          <Property ID="EquipmentType" Type="enum" AutoIncrement="false" Key="true" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" EnumType="AssetManagemetListsRef!AssetManagementEquipmentTypes.Enum" />
+          <Property ID="Manufacturer" Type="enum" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" EnumType="AssetManagemetListsRef!AssetManagementManufacturer.Enum" />
+          <Property ID="Model" Type="enum" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" EnumType="AssetManagemetListsRef!AssetManagementModel.Enum" />
+          <Property ID="SerialNumber" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="50" MinLength="0" Required="false" />
+          <Property ID="GoodsReceivedDate" Type="datetime" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" />
+          <Property ID="WarrantyExpirationDate" Type="datetime" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" />
+          <Property ID="WarrantySLA" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" />
+          <Property ID="StockLocation" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" />
+          <Property ID="Status" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="50" MinLength="0" Required="false" />
+          <Property ID="EquipmentCost" Type="decimal" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="38" MinLength="0" Required="false" />
+        </ClassType>
+        <ClassType ID="Peripheral" Accessibility="Public" Abstract="false" Base="AssetManagementBaseClass" Hosted="false" Singleton="false" Extension="false">
+          <Property ID="AssetTag" Type="int" AutoIncrement="false" Key="true" CaseSensitive="false" MaxLength="5" MinLength="5" Required="true" MinValue="1" MaxValue="99999" />
+        </ClassType>
+        <ClassType ID="OrderBaseClass" Accessibility="Public" Abstract="false" Base="System!System.ConfigItem" Hosted="false" Singleton="false" Extension="false">
+          <Property ID="OrderNumber" Type="string" AutoIncrement="false" Key="true" CaseSensitive="false" MaxLength="20" MinLength="1" Required="false" MinValue="1" MaxValue="99999" />
+          <Property ID="Supplier" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" />
+          <Property ID="CostCenter" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" />
+          <Property ID="Department" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" />
+        </ClassType>
+        <ClassType ID="MobilePhones" Accessibility="Public" Abstract="false" Base="AssetManagementBaseClass" Hosted="false" Singleton="false" Extension="false">
+          <Property ID="DeviceReturnedDate" Type="datetime" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" />
+          <Property ID="RechargeNeeded" Type="bool" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" />
+          <Property ID="RegisteredUser" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" />
+          <Property ID="IMEINumber" Type="string" AutoIncrement="false" Key="true" CaseSensitive="false" MaxLength="16" MinLength="1" Required="true" MinValue="0" />
+        </ClassType>
+        <ClassType ID="MobilePhoneNumberAsset" Accessibility="Public" Abstract="false" Base="AssetManagementBaseClass" Hosted="false" Singleton="false" Extension="false">
+          <Property ID="ContractCommencementDate" Type="datetime" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" />
+          <Property ID="DisconnectionRequestedDate" Type="datetime" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" />
+          <Property ID="DisconnectionRef" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" />
+          <Property ID="ReallocationRef" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" />
+          <Property ID="ContractEndDate" Type="datetime" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" />
+          <Property ID="NumberDisconnected" Type="bool" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" DefaultValue="False" />
+          <Property ID="SimCardSerialNumber" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="25" MinLength="0" Required="false" MinValue="1" />
+          <Property ID="MobilePhoneNumber" Type="string" AutoIncrement="false" Key="true" CaseSensitive="false" MaxLength="11" MinLength="0" Required="true" MinValue="0" />
+          <Property ID="MobileBillingUpdate" Type="bool" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" DefaultValue="True" />
+          <Property ID="RegisteredUser" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" />
+          <Property ID="MobileTariff" Type="enum" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" EnumType="AssetManagemetListsRef!AssetManagementMobileTariffs.Enum" />
+        </ClassType>
+        <ClassType ID="NetworkInfrastructureAsset" Accessibility="Public" Abstract="false" Base="AssetManagementBaseClass" Hosted="false" Singleton="false" Extension="false">
+          <Property ID="AssetTag" Type="int" AutoIncrement="false" Key="true" CaseSensitive="false" MaxLength="5" MinLength="5" Required="true" MinValue="1" MaxValue="99999" />
+          <Property ID="MaintenanceContractReferenceNumber" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="50" MinLength="0" Required="false" MinValue="0" />
+          <Property ID="MaintenanceExpiryDate" Type="datetime" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" />
+        </ClassType>
+        <ClassType ID="IPTelephonyAsset" Accessibility="Public" Abstract="false" Base="AssetManagementBaseClass" Hosted="false" Singleton="false" Extension="false">
+          <Property ID="BasePhoneNumber" Type="int" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="11" MinLength="0" Required="false" MinValue="1" />
+          <Property ID="MACAddress" Type="string" AutoIncrement="false" Key="true" CaseSensitive="false" MaxLength="17" MinLength="0" Required="true" DefaultValue="00:00:00:00:00:00" />
+        </ClassType>
+        <ClassType ID="ServerInfrastructureAsset" Accessibility="Public" Abstract="false" Base="AssetManagementBaseClass" Hosted="false" Singleton="false" Extension="false">
+          <Property ID="AssetTag" Type="int" AutoIncrement="false" Key="true" CaseSensitive="false" MaxLength="5" MinLength="5" Required="false" MinValue="1" MaxValue="99999" />
+        </ClassType>
+        <ClassType ID="RemoteAccessTokenAsset" Accessibility="Public" Abstract="false" Base="AssetManagementBaseClass" Hosted="false" Singleton="false" Extension="false">
+          <Property ID="TokenIDNumber" Type="string" AutoIncrement="false" Key="true" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" />
+          <Property ID="ExpiryDate" Type="datetime" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" />
+        </ClassType>
+        <ClassType ID="PrinterAsset" Accessibility="Public" Abstract="false" Base="AssetManagementBaseClass" Hosted="false" Singleton="false" Extension="false">
+          <Property ID="PrintsTrayNumber" Type="int" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" />
+          <Property ID="PrintsNetwork" Type="bool" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" />
+          <Property ID="PrintsDuplex" Type="bool" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" />
+          <Property ID="AssetTag" Type="string" AutoIncrement="false" Key="true" CaseSensitive="false" MaxLength="5" MinLength="5" Required="true" MinValue="1" MaxValue="99999" />
+          <Property ID="PrintsColour" Type="bool" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" />
+        </ClassType>
+      </ClassTypes>
+      <RelationshipTypes>
+        <RelationshipType ID="MobiletoPhoneNumber" Accessibility="Public" Abstract="false" Base="System!System.Reference">
+          <Source ID="Source_MobilePhones" MinCardinality="0" MaxCardinality="2147483647" Type="MobilePhones" />
+          <Target ID="Target_MobilePhoneNumberAsset" MinCardinality="0" MaxCardinality="1" Type="MobilePhoneNumberAsset" />
+        </RelationshipType>
+        <RelationshipType ID="OrderToAssetRelationship" Accessibility="Public" Abstract="false" Base="System!System.Reference">
+          <Source ID="Source_OrderNumber" MinCardinality="0" MaxCardinality="2147483647" Type="AssetManagementBaseClass" />
+          <Target ID="Target_OrderNumber" MinCardinality="0" MaxCardinality="1" Type="OrderBaseClass" />
+        </RelationshipType>
+        <RelationshipType ID="PrinterIsNetworked" Accessibility="Public" Abstract="false" Base="System!System.Reference">
+          <Source ID="Source_cb2031ac_39f4_45df_a23f_6519b29753a5" MinCardinality="0" MaxCardinality="2147483647" Type="PrinterAsset" />
+          <Target ID="Target_e7c0f000_7d9d_4ca8_9314_d5bb1bc3af6b" MinCardinality="0" MaxCardinality="1" Type="Windows!Microsoft.AD.Printer" />
+        </RelationshipType>
+      </RelationshipTypes>
+      <TypeProjections>
+        <TypeProjection ID="Peripheral.TypeProjection" Accessibility="Public" Type="Peripheral">
+          <Component Path="$Context/Path[Relationship='System!System.ConfigItemOwnedByUser']$" Alias="PeripheralOwnedByUser" />
+          <Component Path="$Context/Path[Relationship='WorkItem!System.WorkItemRelatesToConfigItem' SeedRole='Target']$" Alias="ImpactedWorkItem" />
+          <Component Path="$Context/Path[Relationship='WorkItem!System.WorkItemAboutConfigItem' SeedRole='Target']$" Alias="RelatedWorkItem" />
+          <Component Path="$Context/Path[Relationship='SupportingItem!System.ConfigItemHasFileAttachment']$" Alias="FileAttachment" />
+          <Component Path="$Context/Path[Relationship='System!System.ConfigItemRelatesToConfigItem']$" Alias="RelatedConfigItem" />
+          <Component Path="$Context/Path[Relationship='System!System.ConfigItemRelatesToConfigItem' SeedRole='Target']$" Alias="RelatedConfigItemSource" />
+          <Component Path="$Context/Path[Relationship='CoreKnowledge!System.EntityLinksToKnowledgeDocument']$" Alias="RelatedKnowledgeArticles" />
+        </TypeProjection>
+        <TypeProjection ID="MobilePhone.TypeProjection" Accessibility="Public" Type="MobilePhones">
+          <Component Path="$Context/Path[Relationship='MobiletoPhoneNumber']$" Alias="MobileHasNumberAlias" />
+          <Component Path="$Context/Path[Relationship='System!System.ConfigItemOwnedByUser']$" Alias="MobilePhoneOwnedByUser" />
+          <Component Path="$Context/Path[Relationship='WorkItem!System.WorkItemRelatesToConfigItem' SeedRole='Target']$" Alias="ImpactedWorkItem" />
+          <Component Path="$Context/Path[Relationship='WorkItem!System.WorkItemAboutConfigItem' SeedRole='Target']$" Alias="RelatedWorkItem" />
+          <Component Path="$Context/Path[Relationship='SupportingItem!System.ConfigItemHasFileAttachment']$" Alias="FileAttachment" />
+          <Component Path="$Context/Path[Relationship='System!System.ConfigItemRelatesToConfigItem']$" Alias="RelatedConfigItem" />
+          <Component Path="$Context/Path[Relationship='System!System.ConfigItemRelatesToConfigItem' SeedRole='Target']$" Alias="RelatedConfigItemSource" />
+          <Component Path="$Context/Path[Relationship='CoreKnowledge!System.EntityLinksToKnowledgeDocument']$" Alias="RelatedKnowledgeArticles" />
+        </TypeProjection>
+        <TypeProjection ID="MobilePhoneNumberAsset.TypeProjection" Accessibility="Public" Type="MobilePhoneNumberAsset">
+          <Component Path="$Context/Path[Relationship='System!System.ConfigItemOwnedByUser']$" Alias="MobilePhoneNumberAssetOwnedByUser" />
+          <Component Path="$Context/Path[Relationship='WorkItem!System.WorkItemRelatesToConfigItem' SeedRole='Target']$" Alias="ImpactedWorkItem" />
+          <Component Path="$Context/Path[Relationship='WorkItem!System.WorkItemAboutConfigItem' SeedRole='Target']$" Alias="RelatedWorkItem" />
+          <Component Path="$Context/Path[Relationship='SupportingItem!System.ConfigItemHasFileAttachment']$" Alias="FileAttachment" />
+          <Component Path="$Context/Path[Relationship='System!System.ConfigItemRelatesToConfigItem']$" Alias="RelatedConfigItem" />
+          <Component Path="$Context/Path[Relationship='System!System.ConfigItemRelatesToConfigItem' SeedRole='Target']$" Alias="RelatedConfigItemSource" />
+          <Component Path="$Context/Path[Relationship='CoreKnowledge!System.EntityLinksToKnowledgeDocument']$" Alias="RelatedKnowledgeArticles" />
+        </TypeProjection>
+        <TypeProjection ID="RemoteAccessToken.TypeProjection" Accessibility="Public" Type="RemoteAccessTokenAsset">
+          <Component Path="$Context/Path[Relationship='System!System.ConfigItemOwnedByUser']$" Alias="RemoteAccessTokenOwnedByUser" />
+          <Component Path="$Context/Path[Relationship='WorkItem!System.WorkItemRelatesToConfigItem' SeedRole='Target']$" Alias="ImpactedWorkItem" />
+          <Component Path="$Context/Path[Relationship='WorkItem!System.WorkItemAboutConfigItem' SeedRole='Target']$" Alias="RelatedWorkItem" />
+          <Component Path="$Context/Path[Relationship='SupportingItem!System.ConfigItemHasFileAttachment']$" Alias="FileAttachment" />
+          <Component Path="$Context/Path[Relationship='System!System.ConfigItemRelatesToConfigItem']$" Alias="RelatedConfigItem" />
+          <Component Path="$Context/Path[Relationship='System!System.ConfigItemRelatesToConfigItem' SeedRole='Target']$" Alias="RelatedConfigItemSource" />
+          <Component Path="$Context/Path[Relationship='CoreKnowledge!System.EntityLinksToKnowledgeDocument']$" Alias="RelatedKnowledgeArticles" />
+        </TypeProjection>
+        <TypeProjection ID="IPT.TypeProjection" Accessibility="Public" Type="IPTelephonyAsset">
+          <Component Path="$Context/Path[Relationship='System!System.ConfigItemOwnedByUser']$" Alias="IPTOwnedByUser" />
+          <Component Path="$Context/Path[Relationship='WorkItem!System.WorkItemRelatesToConfigItem' SeedRole='Target']$" Alias="ImpactedWorkItem" />
+          <Component Path="$Context/Path[Relationship='WorkItem!System.WorkItemAboutConfigItem' SeedRole='Target']$" Alias="RelatedWorkItem" />
+          <Component Path="$Context/Path[Relationship='SupportingItem!System.ConfigItemHasFileAttachment']$" Alias="FileAttachment" />
+          <Component Path="$Context/Path[Relationship='System!System.ConfigItemRelatesToConfigItem']$" Alias="RelatedConfigItem" />
+          <Component Path="$Context/Path[Relationship='System!System.ConfigItemRelatesToConfigItem' SeedRole='Target']$" Alias="RelatedConfigItemSource" />
+          <Component Path="$Context/Path[Relationship='CoreKnowledge!System.EntityLinksToKnowledgeDocument']$" Alias="RelatedKnowledgeArticles" />
+        </TypeProjection>
+        <TypeProjection ID="NetworkInfrastructureAsset.TypeProjection" Accessibility="Public" Type="NetworkInfrastructureAsset">
+          <Component Path="$Context/Path[Relationship='System!System.ConfigItemOwnedByUser']$" Alias="NetworkInfrastructureAssetOwnedByUser" />
+          <Component Path="$Context/Path[Relationship='WorkItem!System.WorkItemRelatesToConfigItem' SeedRole='Target']$" Alias="ImpactedWorkItem" />
+          <Component Path="$Context/Path[Relationship='WorkItem!System.WorkItemAboutConfigItem' SeedRole='Target']$" Alias="RelatedWorkItem" />
+          <Component Path="$Context/Path[Relationship='SupportingItem!System.ConfigItemHasFileAttachment']$" Alias="FileAttachment" />
+          <Component Path="$Context/Path[Relationship='System!System.ConfigItemRelatesToConfigItem']$" Alias="RelatedConfigItem" />
+          <Component Path="$Context/Path[Relationship='System!System.ConfigItemRelatesToConfigItem' SeedRole='Target']$" Alias="RelatedConfigItemSource" />
+          <Component Path="$Context/Path[Relationship='CoreKnowledge!System.EntityLinksToKnowledgeDocument']$" Alias="RelatedKnowledgeArticles" />
+        </TypeProjection>
+        <TypeProjection ID="ServerInfrastructureAsset.TypeProjection" Accessibility="Public" Type="ServerInfrastructureAsset">
+          <Component Path="$Context/Path[Relationship='System!System.ConfigItemOwnedByUser']$" Alias="ServerInfrastructureAssetOwnedByUser" />
+          <Component Path="$Context/Path[Relationship='WorkItem!System.WorkItemRelatesToConfigItem' SeedRole='Target']$" Alias="ImpactedWorkItem" />
+          <Component Path="$Context/Path[Relationship='WorkItem!System.WorkItemAboutConfigItem' SeedRole='Target']$" Alias="RelatedWorkItem" />
+          <Component Path="$Context/Path[Relationship='SupportingItem!System.ConfigItemHasFileAttachment']$" Alias="FileAttachment" />
+          <Component Path="$Context/Path[Relationship='System!System.ConfigItemRelatesToConfigItem']$" Alias="RelatedConfigItem" />
+          <Component Path="$Context/Path[Relationship='System!System.ConfigItemRelatesToConfigItem' SeedRole='Target']$" Alias="RelatedConfigItemSource" />
+          <Component Path="$Context/Path[Relationship='CoreKnowledge!System.EntityLinksToKnowledgeDocument']$" Alias="RelatedKnowledgeArticles" />
+        </TypeProjection>
+        <TypeProjection ID="PrinterAsset.TypeProjection" Accessibility="Public" Type="PrinterAsset">
+          <Component Path="$Context/Path[Relationship='PrinterIsNetworked']$" Alias="PrinterIsNetworkedAlias" />
+          <Component Path="$Context/Path[Relationship='System!System.ConfigItemOwnedByUser']$" Alias="PrinterAssetOwnedByUser" />
+          <Component Path="$Context/Path[Relationship='WorkItem!System.WorkItemRelatesToConfigItem' SeedRole='Target']$" Alias="ImpactedWorkItem" />
+          <Component Path="$Context/Path[Relationship='WorkItem!System.WorkItemAboutConfigItem' SeedRole='Target']$" Alias="RelatedWorkItem" />
+          <Component Path="$Context/Path[Relationship='SupportingItem!System.ConfigItemHasFileAttachment']$" Alias="FileAttachment" />
+          <Component Path="$Context/Path[Relationship='System!System.ConfigItemRelatesToConfigItem']$" Alias="RelatedConfigItem" />
+          <Component Path="$Context/Path[Relationship='System!System.ConfigItemRelatesToConfigItem' SeedRole='Target']$" Alias="RelatedConfigItemSource" />
+          <Component Path="$Context/Path[Relationship='CoreKnowledge!System.EntityLinksToKnowledgeDocument']$" Alias="RelatedKnowledgeArticles" />
+        </TypeProjection>
+        <TypeProjection ID="Peripheral.View.TypeProjection" Accessibility="Public" Type="Peripheral">
+          <Component Path="$Context/Path[Relationship='System!System.ConfigItemOwnedByUser']$" Alias="PeripheralOwnedByUser" />
+        </TypeProjection>
+        <TypeProjection ID="MobilePhone.View.TypeProjection" Accessibility="Public" Type="MobilePhones">
+          <Component Path="$Context/Path[Relationship='MobiletoPhoneNumber']$" Alias="MobileHasNumberViewAlias" />
+          <Component Path="$Context/Path[Relationship='System!System.ConfigItemOwnedByUser']$" Alias="MobilePhoneOwnedByUser" />
+        </TypeProjection>
+        <TypeProjection ID="MobilePhoneNumberAsset.View.TypeProjection" Accessibility="Public" Type="MobilePhoneNumberAsset">
+          <Component Path="$Context/Path[Relationship='System!System.ConfigItemOwnedByUser']$" Alias="MobilePhoneNumberAssetOwnedByUser" />
+        </TypeProjection>
+        <TypeProjection ID="RemoteAccessToken.View.TypeProjection" Accessibility="Public" Type="RemoteAccessTokenAsset">
+          <Component Path="$Context/Path[Relationship='System!System.ConfigItemOwnedByUser']$" Alias="RemoteAccessTokenOwnedByUser" />
+        </TypeProjection>
+        <TypeProjection ID="IPT.View.TypeProjection" Accessibility="Public" Type="IPTelephonyAsset">
+          <Component Path="$Context/Path[Relationship='System!System.ConfigItemOwnedByUser']$" Alias="IPTOwnedByUser" />
+        </TypeProjection>
+        <TypeProjection ID="NetworkInfrastructureAsset.View.TypeProjection" Accessibility="Public" Type="NetworkInfrastructureAsset">
+          <Component Path="$Context/Path[Relationship='System!System.ConfigItemOwnedByUser']$" Alias="NetworkInfrastructureAssetOwnedByUser" />
+        </TypeProjection>
+        <TypeProjection ID="ServerInfrastructureAsset.View.TypeProjection" Accessibility="Public" Type="ServerInfrastructureAsset">
+          <Component Path="$Context/Path[Relationship='System!System.ConfigItemOwnedByUser']$" Alias="ServerInfrastructureAssetOwnedByUser" />
+        </TypeProjection>
+        <TypeProjection ID="PrinterAsset.View.TypeProjection" Accessibility="Public" Type="PrinterAsset">
+          <Component Path="$Context/Path[Relationship='PrinterIsNetworked']$" Alias="PrinterIsNetworkedAlias" />
+          <Component Path="$Context/Path[Relationship='System!System.ConfigItemOwnedByUser']$" Alias="PrinterAssetOwnedByUser" />
+        </TypeProjection>
+        <TypeProjection ID="AllComputers.View.ProjectionType" Accessibility="Public" Type="Windows!Microsoft.Windows.Computer">
+          <Component Path="$Context/Path[Relationship='ConfigurationManager!Microsoft.SystemCenter.ConfigurationManager.DeployedComputerRunsWindowsComputer' SeedRole='Target']$" Alias="PhysicalComputer" />
+          <Component Path="$Context/Path[Relationship='Windows!Microsoft.Windows.ComputerHostsOperatingSystem']$" Alias="OperatingSystem" />
+          <Component Path="$Context/Path[Relationship='System!System.ConfigItemOwnedByUser']$" Alias="ComputerOwnedByUser" />
+        </TypeProjection>
+        <TypeProjection ID="AllPrinters.View.ProjectionType" Accessibility="Public" Type="Windows!Microsoft.AD.Printer">
+          <Component Path="$Context/Path[Relationship='System!System.ConfigItemOwnedByUser']$" Alias="ComputerOwnedByUser" />
+        </TypeProjection>
+      </TypeProjections>
+    </EntityTypes>
+  </TypeDefinitions>
+  <Categories>
+    <Category ID="AssetManagement.Category" Value="Console!Microsoft.EnterpriseManagement.ServiceManager.ManagementPack">
+      <ManagementPackName>AssetManagementLists</ManagementPackName>
+      <ManagementPackVersion>2.0.0.1</ManagementPackVersion>
+      <ManagementPackPublicKeyToken>0a39b272096917b0</ManagementPackPublicKeyToken>
+    </Category>
+  </Categories>
+  <LanguagePacks>
+    <LanguagePack ID="ENG" IsDefault="true">
+      <DisplayStrings>
+        <DisplayString ElementID="AssetManagement">
+          <Name>Asset Management</Name>
+          <Description>Asset Management extensions for System Center Service Manager, providing classes for Mobile Phones, Peripherals, IPT Phones, Network Infrastructure and more.</Description>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementBaseClass">
+          <Name>Asset Management Base Class</Name>
+          <Description>Base class for other asset management items to inherit common items from.</Description>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementBaseClass" SubElementID="AssetID">
+          <Name>Asset ID</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementBaseClass" SubElementID="SerialNumber">
+          <Name>Serial Number</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementBaseClass" SubElementID="EquipmentType">
+          <Name>Equipment Type</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementBaseClass" SubElementID="Manufacturer">
+          <Name>Manufacturer</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementBaseClass" SubElementID="Model">
+          <Name>Model</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementBaseClass" SubElementID="WarrantySLA">
+          <Name>Warranty Service Level Agreement Description</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementBaseClass" SubElementID="Status">
+          <Name>Asset Status</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementBaseClass" SubElementID="GoodsReceivedDate">
+          <Name>Goods Received Date</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementBaseClass" SubElementID="StockLocation">
+          <Name>Stock Location</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementBaseClass" SubElementID="WarrantyExpirationDate">
+          <Name>Warranty Expiration Date</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementBaseClass" SubElementID="EquipmentCost">
+          <Name>Equipment Cost</Name>
+        </DisplayString>
+        <DisplayString ElementID="OrderBaseClass">
+          <Name>Order Base Class</Name>
+          <Description>Base class for order items to inherit common items from.</Description>
+        </DisplayString>
+        <DisplayString ElementID="OrderBaseClass" SubElementID="OrderNumber">
+          <Name>Order Number</Name>
+        </DisplayString>
+        <DisplayString ElementID="OrderBaseClass" SubElementID="Supplier">
+          <Name>Supplier</Name>
+        </DisplayString>
+        <DisplayString ElementID="OrderBaseClass" SubElementID="Department">
+          <Name>Department</Name>
+        </DisplayString>
+        <DisplayString ElementID="OrderBaseClass" SubElementID="CostCenter">
+          <Name>CostCenter</Name>
+        </DisplayString>
+        <DisplayString ElementID="Peripheral">
+          <Name>Peripheral Asset</Name>
+          <Description>Asset Management - Peripherals</Description>
+        </DisplayString>
+        <DisplayString ElementID="MobilePhones">
+          <Name>Mobile Phone Asset</Name>
+          <Description>Asset Management - Mobile Phones</Description>
+        </DisplayString>
+        <DisplayString ElementID="Peripheral" SubElementID="AssetTag">
+          <Name>Asset Tag Number</Name>
+        </DisplayString>
+        <DisplayString ElementID="NetworkInfrastructureAsset" SubElementID="AssetTag">
+          <Name>Asset Tag Number</Name>
+        </DisplayString>
+        <DisplayString ElementID="ServerInfrastructureAsset" SubElementID="AssetTag">
+          <Name>Asset Tag Number</Name>
+        </DisplayString>
+        <DisplayString ElementID="MobilePhones" SubElementID="IMEINumber">
+          <Name>IMEI Number</Name>
+        </DisplayString>
+        <DisplayString ElementID="MobilePhoneNumberAsset" SubElementID="ContractCommencementDate">
+          <Name>Contract Commencement Date</Name>
+        </DisplayString>
+        <DisplayString ElementID="MobilePhoneNumberAsset" SubElementID="MobilePhoneNumber">
+          <Name>Mobile Phone Number</Name>
+        </DisplayString>
+        <DisplayString ElementID="NetworkInfrastructureAsset">
+          <Name>Network Infrastructure Asset</Name>
+          <Description>This class inherits from Asset Management Base Class.</Description>
+        </DisplayString>
+        <DisplayString ElementID="IPTelephonyAsset">
+          <Name>IP Telephony Asset</Name>
+          <Description>This class inherits from Asset Management Base Class.</Description>
+        </DisplayString>
+        <DisplayString ElementID="IPTelephonyAsset" SubElementID="MACAddress">
+          <Name>MAC Address</Name>
+        </DisplayString>
+        <DisplayString ElementID="ServerInfrastructureAsset">
+          <Name>Server Infrastructure Asset</Name>
+          <Description>This class inherits from Asset Management Base Class.</Description>
+        </DisplayString>
+        <DisplayString ElementID="MobilePhoneNumberAsset" SubElementID="MobileTariff">
+          <Name>Mobile Tariff</Name>
+        </DisplayString>
+        <DisplayString ElementID="MobilePhoneNumberAsset">
+          <Name>Mobile Phone Number Asset</Name>
+          <Description>This class inherits from Asset Management Base Class.</Description>
+        </DisplayString>
+        <DisplayString ElementID="MobiletoPhoneNumber" SubElementID="Target_MobilePhoneNumberAsset">
+          <Name>Target_MobilePhoneNumberAsset</Name>
+        </DisplayString>
+        <DisplayString ElementID="MobiletoPhoneNumber" SubElementID="Source_MobilePhones">
+          <Name>Source_MobilePhones</Name>
+        </DisplayString>
+        <DisplayString ElementID="MobiletoPhoneNumber">
+          <Name>Mobile to Phone Number</Name>
+        </DisplayString>
+        <DisplayString ElementID="OrderToAssetRelationship" SubElementID="Target_OrderNumber">
+          <Name>Target_OrderNumber</Name>
+        </DisplayString>
+        <DisplayString ElementID="OrderToAssetRelationship" SubElementID="Source_OrderNumber">
+          <Name>Source_OrderNumber</Name>
+        </DisplayString>
+        <DisplayString ElementID="OrderToAssetRelationship">
+          <Name>Relates the Order Base Class to the Asset Management Base Class</Name>
+        </DisplayString>
+        <DisplayString ElementID="MobilePhoneNumberAsset" SubElementID="SimCardSerialNumber">
+          <Name>Sim Card Serial Number</Name>
+        </DisplayString>
+        <DisplayString ElementID="MobilePhones" SubElementID="DeviceReturnedDate">
+          <Name>Device Returned Date</Name>
+        </DisplayString>
+        <DisplayString ElementID="MobilePhones" SubElementID="RechargeNeeded">
+          <Name>Recharge Needed</Name>
+        </DisplayString>
+        <DisplayString ElementID="MobilePhoneNumberAsset" SubElementID="DisconnectionRequestedDate">
+          <Name>Disconnection Requested Date</Name>
+        </DisplayString>
+        <DisplayString ElementID="MobilePhoneNumberAsset" SubElementID="DisconnectionRef">
+          <Name>Disconnection Reference Number</Name>
+        </DisplayString>
+        <DisplayString ElementID="MobilePhoneNumberAsset" SubElementID="ReallocationRef">
+          <Name>Reallocation Reference Number</Name>
+        </DisplayString>
+        <DisplayString ElementID="IPTelephonyAsset" SubElementID="BasePhoneNumber">
+          <Name>Base Phone Number</Name>
+        </DisplayString>
+        <DisplayString ElementID="RemoteAccessTokenAsset">
+          <Name>Remote Access Token Asset</Name>
+          <Description>Asset Management - Remote Access Token Assets</Description>
+        </DisplayString>
+        <DisplayString ElementID="RemoteAccessTokenAsset" SubElementID="TokenIDNumber">
+          <Name>Token ID Number</Name>
+        </DisplayString>
+        <DisplayString ElementID="RemoteAccessTokenAsset" SubElementID="ExpiryDate">
+          <Name>Expiry Date</Name>
+        </DisplayString>
+        <DisplayString ElementID="MobilePhoneNumberAsset" SubElementID="NumberDisconnected">
+          <Name>Number Disconnected</Name>
+        </DisplayString>
+        <DisplayString ElementID="MobilePhoneNumberAsset" SubElementID="ContractEndDate">
+          <Name>Contract End Date</Name>
+        </DisplayString>
+        <DisplayString ElementID="Peripheral.TypeProjection">
+          <Name>Peripheral Assets (advanced)</Name>
+          <Description>Defines the properties used in peripheral forms</Description>
+        </DisplayString>
+        <DisplayString ElementID="MobilePhoneNumberAsset.TypeProjection">
+          <Name>Mobile Phone Number Asset (advanced)</Name>
+          <Description>Defines the properties used in mobile phone number forms</Description>
+        </DisplayString>
+        <DisplayString ElementID="MobilePhone.TypeProjection">
+          <Name>Mobile Phone Asset (advanced)</Name>
+          <Description>Defines the properties used in mobile device forms</Description>
+        </DisplayString>
+        <DisplayString ElementID="RemoteAccessToken.TypeProjection">
+          <Name>Remote Access Token Assets (advanced)</Name>
+          <Description>Defines the properties used in remote access token forms</Description>
+        </DisplayString>
+        <DisplayString ElementID="IPT.TypeProjection">
+          <Name>IP Telephony Assets (advanced)</Name>
+          <Description>Defines the properties used in IP Telephony forms</Description>
+        </DisplayString>
+        <DisplayString ElementID="NetworkInfrastructureAsset.TypeProjection">
+          <Name>Network Infrastructure Assets (advanced)</Name>
+          <Description>Defines the properties used in network infrastructure forms</Description>
+        </DisplayString>
+        <DisplayString ElementID="ServerInfrastructureAsset.TypeProjection">
+          <Name>Server Infrastructure Assets (advanced)</Name>
+          <Description>Defines the properties used in server infrastructure forms</Description>
+        </DisplayString>
+        <DisplayString ElementID="PrinterAsset.TypeProjection">
+          <Name>Printer Assets (advanced)</Name>
+          <Description>Defines the properties used in printer asset forms</Description>
+        </DisplayString>
+        <DisplayString ElementID="PrinterAsset.View.TypeProjection">
+          <Name>Printer Assets (typical)</Name>
+          <Description>Defines the properties of printers typically used in views</Description>
+        </DisplayString>
+        <DisplayString ElementID="Peripheral.View.TypeProjection">
+          <Name>Peripheral Assets (typical)</Name>
+          <Description>Defines the properties of peripherals typically used in views</Description>
+        </DisplayString>
+        <DisplayString ElementID="MobilePhoneNumberAsset.View.TypeProjection">
+          <Name>Mobile Phone Number Asset (typical)</Name>
+          <Description>Defines the properties of mobile phone numbers typically used in views</Description>
+        </DisplayString>
+        <DisplayString ElementID="MobilePhone.View.TypeProjection">
+          <Name>Mobile Phone Asset (typical)</Name>
+          <Description>Defines the properties of mobile devices typically used in views</Description>
+        </DisplayString>
+        <DisplayString ElementID="RemoteAccessToken.View.TypeProjection">
+          <Name>Remote Access Token Assets (typical)</Name>
+          <Description>Defines the properties of remote access tokens typically used in views</Description>
+        </DisplayString>
+        <DisplayString ElementID="IPT.View.TypeProjection">
+          <Name>IP Telephony Assets (typical)</Name>
+          <Description>Defines the properties of IP Telephony assets typically used in views</Description>
+        </DisplayString>
+        <DisplayString ElementID="NetworkInfrastructureAsset.View.TypeProjection">
+          <Name>Network Infrastructure Assets (typical)</Name>
+          <Description>Defines the properties of network infrastructure assets typically used in views</Description>
+        </DisplayString>
+        <DisplayString ElementID="ServerInfrastructureAsset.View.TypeProjection">
+          <Name>Server Infrastructure Assets (typical)</Name>
+          <Description>Defines the properties of server infrastructure assets typically used in views</Description>
+        </DisplayString>
+        <DisplayString ElementID="NetworkInfrastructureAsset" SubElementID="MaintenanceContractReferenceNumber">
+          <Name>Maintenance Contract Reference Number</Name>
+        </DisplayString>
+        <DisplayString ElementID="NetworkInfrastructureAsset" SubElementID="MaintenanceExpiryDate">
+          <Name>Maintenance Expiry Date</Name>
+        </DisplayString>
+        <DisplayString ElementID="AllComputers.View.ProjectionType">
+          <Name>Computer Assets (typical - used for Asset Management MP)</Name>
+          <Description>Defines the properties of computer assets typically used in views</Description>
+        </DisplayString>
+        <DisplayString ElementID="AllPrinters.View.ProjectionType">
+          <Name>Printer Assets (typical - DEPRECATED)</Name>
+          <Description>Defines the properties of printer assets typically used in views</Description>
+        </DisplayString>
+        <DisplayString ElementID="MobilePhoneNumberAsset" SubElementID="MobileBillingUpdate">
+          <Name>Mobile Billing Update</Name>
+        </DisplayString>
+        <DisplayString ElementID="MobilePhoneNumberAsset" SubElementID="RegisteredUser">
+          <Name>Registered User</Name>
+        </DisplayString>
+        <DisplayString ElementID="MobilePhones" SubElementID="RegisteredUser">
+          <Name>Registered User</Name>
+        </DisplayString>
+        <DisplayString ElementID="PrinterAsset">
+          <Name>Printer Asset</Name>
+          <Description>Asset Management - Printer Assets</Description>
+        </DisplayString>
+        <DisplayString ElementID="PrinterAsset" SubElementID="PrintsColour">
+          <Name>PrintsColour</Name>
+        </DisplayString>
+        <DisplayString ElementID="PrinterAsset" SubElementID="AssetTag">
+          <Name>Asset Tag Number</Name>
+        </DisplayString>
+        <DisplayString ElementID="PrinterAsset" SubElementID="PrintsDuplex">
+          <Name>PrintsDuplex</Name>
+        </DisplayString>
+        <DisplayString ElementID="PrinterAsset" SubElementID="PrintsNetwork">
+          <Name>PrintsNetwork</Name>
+        </DisplayString>
+        <DisplayString ElementID="PrinterAsset" SubElementID="PrintsTrayNumber">
+          <Name>PrintsTrayNumber</Name>
+        </DisplayString>
+        <DisplayString ElementID="PrinterIsNetworked">
+          <Name>PrinterIsNetworked</Name>
+        </DisplayString>
+        <DisplayString ElementID="PrinterIsNetworked" SubElementID="Source_cb2031ac_39f4_45df_a23f_6519b29753a5">
+          <Name>Source_cb2031ac_39f4_45df_a23f_6519b29753a5</Name>
+        </DisplayString>
+        <DisplayString ElementID="PrinterIsNetworked" SubElementID="Target_e7c0f000_7d9d_4ca8_9314_d5bb1bc3af6b">
+          <Name>Target_e7c0f000_7d9d_4ca8_9314_d5bb1bc3af6b</Name>
+        </DisplayString>
+      </DisplayStrings>
+      <KnowledgeArticles></KnowledgeArticles>
+    </LanguagePack>
+    <LanguagePack ID="ENU" IsDefault="false">
+      <DisplayStrings>
+        <DisplayString ElementID="AssetManagement">
+          <Name>Asset Management</Name>
+          <Description>Asset Management extensions for System Center Service Manager, providing classes for Mobile Phones, Peripherals, IPT Phones, Network Infrastructure and more.</Description>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementBaseClass">
+          <Name>Asset Management Base Class</Name>
+          <Description>Base class for other asset management items to inherit common items from.</Description>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementBaseClass" SubElementID="AssetID">
+          <Name>Asset ID</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementBaseClass" SubElementID="SerialNumber">
+          <Name>Serial Number</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementBaseClass" SubElementID="EquipmentType">
+          <Name>Equipment Type</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementBaseClass" SubElementID="Manufacturer">
+          <Name>Manufacturer</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementBaseClass" SubElementID="Model">
+          <Name>Model</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementBaseClass" SubElementID="WarrantySLA">
+          <Name>Warranty Service Level Agreement Description</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementBaseClass" SubElementID="Status">
+          <Name>Asset Status</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementBaseClass" SubElementID="GoodsReceivedDate">
+          <Name>Goods Received Date</Name>
+        </DisplayString>
+        <DisplayString ElementID="OrderBaseClass">
+          <Name>Order Base Class</Name>
+          <Description>Base class for order items to inherit common items from.</Description>
+        </DisplayString>
+        <DisplayString ElementID="OrderBaseClass" SubElementID="OrderNumber">
+          <Name>Order Number</Name>
+        </DisplayString>
+        <DisplayString ElementID="OrderBaseClass" SubElementID="Supplier">
+          <Name>Supplier</Name>
+        </DisplayString>
+        <DisplayString ElementID="OrderBaseClass" SubElementID="Department">
+          <Name>Department</Name>
+        </DisplayString>
+        <DisplayString ElementID="OrderBaseClass" SubElementID="CostCenter">
+          <Name>CostCenter</Name>
+        </DisplayString>
+        <DisplayString ElementID="Peripheral">
+          <Name>Peripheral Asset</Name>
+          <Description>Asset Management - Peripherals</Description>
+        </DisplayString>
+        <DisplayString ElementID="MobilePhones">
+          <Name>Mobile Phone Asset</Name>
+          <Description>Asset Management - Mobile Phones</Description>
+        </DisplayString>
+        <DisplayString ElementID="Peripheral" SubElementID="AssetTag">
+          <Name>Asset Tag Number</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementBaseClass" SubElementID="StockLocation">
+          <Name>Stock Location</Name>
+        </DisplayString>
+        <DisplayString ElementID="NetworkInfrastructureAsset" SubElementID="AssetTag">
+          <Name>Asset Tag Number</Name>
+        </DisplayString>
+        <DisplayString ElementID="ServerInfrastructureAsset" SubElementID="AssetTag">
+          <Name>Asset Tag Number</Name>
+        </DisplayString>
+        <DisplayString ElementID="MobilePhones" SubElementID="IMEINumber">
+          <Name>IMEI Number</Name>
+        </DisplayString>
+        <DisplayString ElementID="MobilePhoneNumberAsset" SubElementID="ContractCommencementDate">
+          <Name>Contract Commencement Date</Name>
+        </DisplayString>
+        <DisplayString ElementID="MobilePhoneNumberAsset" SubElementID="MobilePhoneNumber">
+          <Name>Mobile Phone Number</Name>
+        </DisplayString>
+        <DisplayString ElementID="NetworkInfrastructureAsset">
+          <Name>Network Infrastructure Asset</Name>
+          <Description>This class inherits from Asset Management Base Class.</Description>
+        </DisplayString>
+        <DisplayString ElementID="IPTelephonyAsset">
+          <Name>IP Telephony Asset</Name>
+          <Description>This class inherits from Asset Management Base Class.</Description>
+        </DisplayString>
+        <DisplayString ElementID="IPTelephonyAsset" SubElementID="MACAddress">
+          <Name>MAC Address</Name>
+        </DisplayString>
+        <DisplayString ElementID="ServerInfrastructureAsset">
+          <Name>Server Infrastructure Asset</Name>
+          <Description>This class inherits from Asset Management Base Class.</Description>
+        </DisplayString>
+        <DisplayString ElementID="MobilePhoneNumberAsset" SubElementID="MobileTariff">
+          <Name>Mobile Tariff</Name>
+        </DisplayString>
+        <DisplayString ElementID="MobilePhoneNumberAsset">
+          <Name>Mobile Phone Number Asset</Name>
+          <Description>This class inherits from Asset Management Base Class.</Description>
+        </DisplayString>
+        <DisplayString ElementID="MobiletoPhoneNumber" SubElementID="Target_MobilePhoneNumberAsset">
+          <Name>Target_MobilePhoneNumberAsset</Name>
+        </DisplayString>
+        <DisplayString ElementID="MobiletoPhoneNumber" SubElementID="Source_MobilePhones">
+          <Name>Source_MobilePhones</Name>
+        </DisplayString>
+        <DisplayString ElementID="MobiletoPhoneNumber">
+          <Name>Mobile to Phone Number</Name>
+        </DisplayString>
+        <DisplayString ElementID="MobilePhoneNumberAsset" SubElementID="SimCardSerialNumber">
+          <Name>Sim Card Serial Number</Name>
+        </DisplayString>
+        <DisplayString ElementID="MobilePhones" SubElementID="DeviceReturnedDate">
+          <Name>Device Returned Date</Name>
+        </DisplayString>
+        <DisplayString ElementID="MobilePhones" SubElementID="RechargeNeeded">
+          <Name>Recharge Needed</Name>
+        </DisplayString>
+        <DisplayString ElementID="MobilePhoneNumberAsset" SubElementID="DisconnectionRequestedDate">
+          <Name>Disconnection Requested Date</Name>
+        </DisplayString>
+        <DisplayString ElementID="MobilePhoneNumberAsset" SubElementID="DisconnectionRef">
+          <Name>Disconnection Reference Number</Name>
+        </DisplayString>
+        <DisplayString ElementID="MobilePhoneNumberAsset" SubElementID="ReallocationRef">
+          <Name>Reallocation Reference Number</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementBaseClass" SubElementID="WarrantyExpirationDate">
+          <Name>Warranty Expiration Date</Name>
+        </DisplayString>
+        <DisplayString ElementID="IPTelephonyAsset" SubElementID="BasePhoneNumber">
+          <Name>Base Phone Number</Name>
+        </DisplayString>
+        <DisplayString ElementID="RemoteAccessTokenAsset">
+          <Name>Remote Access Token Asset</Name>
+          <Description>Asset Management - Remote Access Token Assets</Description>
+        </DisplayString>
+        <DisplayString ElementID="RemoteAccessTokenAsset" SubElementID="TokenIDNumber">
+          <Name>Token ID Number</Name>
+        </DisplayString>
+        <DisplayString ElementID="RemoteAccessTokenAsset" SubElementID="ExpiryDate">
+          <Name>Expiry Date</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementBaseClass" SubElementID="EquipmentCost">
+          <Name>Equipment Cost</Name>
+        </DisplayString>
+        <DisplayString ElementID="MobilePhoneNumberAsset" SubElementID="NumberDisconnected">
+          <Name>Number Disconnected</Name>
+        </DisplayString>
+        <DisplayString ElementID="MobilePhoneNumberAsset" SubElementID="ContractEndDate">
+          <Name>Contract End Date</Name>
+        </DisplayString>
+        <DisplayString ElementID="OrderToAssetRelationship" SubElementID="Target_OrderNumber">
+          <Name>Target_OrderNumber</Name>
+        </DisplayString>
+        <DisplayString ElementID="OrderToAssetRelationship" SubElementID="Source_OrderNumber">
+          <Name>Source_OrderNumber</Name>
+        </DisplayString>
+        <DisplayString ElementID="OrderToAssetRelationship">
+          <Name>Relates the Order Base Class to the Asset Management Base Class</Name>
+        </DisplayString>
+        <DisplayString ElementID="Peripheral.TypeProjection">
+          <Name>Peripheral Assets (advanced)</Name>
+          <Description>Defines the properties used in peripheral forms</Description>
+        </DisplayString>
+        <DisplayString ElementID="MobilePhoneNumberAsset.TypeProjection">
+          <Name>Mobile Phone Number Asset (advanced)</Name>
+          <Description>Defines the properties used in mobile phone number forms</Description>
+        </DisplayString>
+        <DisplayString ElementID="MobilePhone.TypeProjection">
+          <Name>Mobile Phone Asset (advanced)</Name>
+          <Description>Defines the properties used in mobile device forms</Description>
+        </DisplayString>
+        <DisplayString ElementID="RemoteAccessToken.TypeProjection">
+          <Name>Remote Access Token Assets (advanced)</Name>
+          <Description>Defines the properties used in remote access token forms</Description>
+        </DisplayString>
+        <DisplayString ElementID="IPT.TypeProjection">
+          <Name>IP Telephony Assets (advanced)</Name>
+          <Description>Defines the properties used in IP Telephony forms</Description>
+        </DisplayString>
+        <DisplayString ElementID="NetworkInfrastructureAsset.TypeProjection">
+          <Name>Network Infrastructure Assets (advanced)</Name>
+          <Description>Defines the properties used in network infrastructure forms</Description>
+        </DisplayString>
+        <DisplayString ElementID="ServerInfrastructureAsset.TypeProjection">
+          <Name>Server Infrastructure Assets (advanced)</Name>
+          <Description>Defines the properties used in server infrastructure forms</Description>
+        </DisplayString>
+        <DisplayString ElementID="PrinterAsset.TypeProjection">
+          <Name>Printer Assets (advanced)</Name>
+          <Description>Defines the properties used in printer asset forms</Description>
+        </DisplayString>
+        <DisplayString ElementID="PrinterAsset.View.TypeProjection">
+          <Name>Printer Assets (typical)</Name>
+          <Description>Defines the properties of printers typically used in views</Description>
+        </DisplayString>
+        <DisplayString ElementID="Peripheral.View.TypeProjection">
+          <Name>Peripheral Assets (typical)</Name>
+          <Description>Defines the properties of peripherals typically used in views</Description>
+        </DisplayString>
+        <DisplayString ElementID="MobilePhoneNumberAsset.View.TypeProjection">
+          <Name>Mobile Phone Number Asset (typical)</Name>
+          <Description>Defines the properties of mobile phone numbers typically used in views</Description>
+        </DisplayString>
+        <DisplayString ElementID="MobilePhone.View.TypeProjection">
+          <Name>Mobile Phone Asset (typical)</Name>
+          <Description>Defines the properties of mobile devices typically used in views</Description>
+        </DisplayString>
+        <DisplayString ElementID="RemoteAccessToken.View.TypeProjection">
+          <Name>Remote Access Token Assets (typical)</Name>
+          <Description>Defines the properties of remote access tokens typically used in views</Description>
+        </DisplayString>
+        <DisplayString ElementID="IPT.View.TypeProjection">
+          <Name>IP Telephony Assets (typical)</Name>
+          <Description>Defines the properties of IP Telephony assets typically used in views</Description>
+        </DisplayString>
+        <DisplayString ElementID="NetworkInfrastructureAsset.View.TypeProjection">
+          <Name>Network Infrastructure Assets (typical)</Name>
+          <Description>Defines the properties of network infrastructure assets typically used in views</Description>
+        </DisplayString>
+        <DisplayString ElementID="ServerInfrastructureAsset.View.TypeProjection">
+          <Name>Server Infrastructure Assets (typical)</Name>
+          <Description>Defines the properties of server infrastructure assets typically used in views</Description>
+        </DisplayString>
+        <DisplayString ElementID="NetworkInfrastructureAsset" SubElementID="MaintenanceContractReferenceNumber">
+          <Name>Maintenance Contract Reference Number</Name>
+        </DisplayString>
+        <DisplayString ElementID="NetworkInfrastructureAsset" SubElementID="MaintenanceExpiryDate">
+          <Name>Maintenance Expiry Date</Name>
+        </DisplayString>
+        <DisplayString ElementID="AllComputers.View.ProjectionType">
+          <Name>Computer Assets (typical - used for Asset Management MP)</Name>
+          <Description>Defines the properties of computer assets typically used in views</Description>
+        </DisplayString>
+        <DisplayString ElementID="AllPrinters.View.ProjectionType">
+          <Name>Printer Assets (typical - DEPRECATED)</Name>
+          <Description>Defines the properties of printer assets typically used in views</Description>
+        </DisplayString>
+        <DisplayString ElementID="MobilePhoneNumberAsset" SubElementID="MobileBillingUpdate">
+          <Name>Mobile Billing Update</Name>
+        </DisplayString>
+        <DisplayString ElementID="MobilePhoneNumberAsset" SubElementID="RegisteredUser">
+          <Name>Registered User</Name>
+        </DisplayString>
+        <DisplayString ElementID="MobilePhones" SubElementID="RegisteredUser">
+          <Name>Registered User</Name>
+        </DisplayString>
+        <DisplayString ElementID="PrinterAsset">
+          <Name>Printer Asset</Name>
+          <Description>Asset Management - Printer Assets</Description>
+        </DisplayString>
+        <DisplayString ElementID="PrinterAsset" SubElementID="PrintsColour">
+          <Name>PrintsColour</Name>
+        </DisplayString>
+        <DisplayString ElementID="PrinterAsset" SubElementID="AssetTag">
+          <Name>Asset Tag Number</Name>
+        </DisplayString>
+        <DisplayString ElementID="PrinterAsset" SubElementID="PrintsDuplex">
+          <Name>PrintsDuplex</Name>
+        </DisplayString>
+        <DisplayString ElementID="PrinterAsset" SubElementID="PrintsNetwork">
+          <Name>PrintsNetwork</Name>
+        </DisplayString>
+        <DisplayString ElementID="PrinterAsset" SubElementID="PrintsTrayNumber">
+          <Name>PrintsTrayNumber</Name>
+        </DisplayString>
+        <DisplayString ElementID="PrinterIsNetworked">
+          <Name>PrinterIsNetworked</Name>
+        </DisplayString>
+        <DisplayString ElementID="PrinterIsNetworked" SubElementID="Source_cb2031ac_39f4_45df_a23f_6519b29753a5">
+          <Name>Source_cb2031ac_39f4_45df_a23f_6519b29753a5</Name>
+        </DisplayString>
+        <DisplayString ElementID="PrinterIsNetworked" SubElementID="Target_e7c0f000_7d9d_4ca8_9314_d5bb1bc3af6b">
+          <Name>Target_e7c0f000_7d9d_4ca8_9314_d5bb1bc3af6b</Name>
+        </DisplayString>
+      </DisplayStrings>
+      <KnowledgeArticles></KnowledgeArticles>
+    </LanguagePack>
+  </LanguagePacks>
+</ManagementPack>
