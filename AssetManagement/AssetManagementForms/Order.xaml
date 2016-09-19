@@ -35,9 +35,7 @@
                     <StackPanel Grid.Row="0" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5">
                         <Label Content="Order" Height="31" FontWeight="Bold" FontSize="14"/>
                     </StackPanel>
-                    <StackPanel Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5">
-                        <Image Height="40" Source="/AssetManagementForms;component/CelaneseLogo_NoTag_150px.png"/>
-                    </StackPanel>
+                    <StackPanel Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5"/>
                     <StackPanel Grid.Row="1" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5">
                         <Label Content="Order Number" />
                         <TextBox x:Name="OrderNumber" Text="{Binding OrderNumber, Mode=TwoWay}" />

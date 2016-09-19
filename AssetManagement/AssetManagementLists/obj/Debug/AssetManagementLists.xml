@@ -3,7 +3,7 @@
   <Manifest>
     <Identity>
       <ID>AssetManagementLists</ID>
-      <Version>7.5.3079.15</Version>
+      <Version>7.5.3079.16</Version>
     </Identity>
     <Name>AssetManagementLists</Name>
     <References>
@@ -14,7 +14,7 @@
       </Reference>
       <Reference Alias="AssetManagement">
         <ID>AssetManagement</ID>
-        <Version>2.0.0.226</Version>
+        <Version>2.0.0.242</Version>
         <PublicKeyToken>7d57b1335ea864b0</PublicKeyToken>
       </Reference>
     </References>

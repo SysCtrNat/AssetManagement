@@ -42,9 +42,7 @@
                     <StackPanel Grid.Row="0" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5">
                         <Label Name="AssetID" Content="{Binding AssetID, Mode=OneWay}" Height="31" FontWeight="Bold" FontSize="14"/>
                     </StackPanel>
-                    <StackPanel Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5">
-                        <Image Height="40" Source="/AssetManagementForms;component/CelaneseLogo_NoTag_150px.png"/>
-                    </StackPanel>
+                    <StackPanel Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5"/>
                     <StackPanel Grid.Row="1" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5">
                         <Label Content="Asset Lifecycle Status"/>
                         <scwpf:ListPicker x:Name="AssetLifecycleStatus" HorizontalAlignment="Stretch" Width="Auto" ParentCategoryId="{Binding Mode=OneWay, Source={x:Static local:Resources.guidAssetStatusTypeEnumRoot}}" SelectedItem="{Binding AssetStatus, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>

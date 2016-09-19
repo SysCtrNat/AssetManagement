@@ -3,7 +3,7 @@
   <Manifest>
     <Identity>
       <ID>AssetManagementViews</ID>
-      <Version>1.0.0.190</Version>
+      <Version>1.0.0.191</Version>
     </Identity>
     <Name>AssetManagementViews</Name>
     <References>
@@ -108,23 +108,23 @@
         </Data>
         <Presentation>
           <Columns>
-            <mux:ColumnCollection xmlns:res="clr-namespace:AssetManagementForms;assembly=AssetManagementForms.Assembly" xmlns:slaBinding="clr-namespace:Microsoft.EnterpriseManagement.ServiceManager.SLA.Common;assembly=Microsoft.EnterpriseManagement.ServiceManager.SLA.Common" xmlns:toolbox="clr-namespace:Microsoft.EnterpriseManagement.UI.WpfToolbox;assembly=Microsoft.EnterpriseManagement.UI.FormsInfra" xmlns:appCommon="clr-namespace:Microsoft.EnterpriseManagement.ServiceManager.Application.Common;assembly=Microsoft.EnterpriseManagement.ServiceManager.Application.Common" xmlns:data="clr-namespace:Microsoft.EnterpriseManagement.UI.Extensions;assembly=Microsoft.EnterpriseManagement.UI.Extensions" xmlns:datebinding="clr-namespace:Microsoft.EnterpriseManagement.UI.Extensions;assembly=Microsoft.EnterpriseManagement.UI.Extensions" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:mux="http://schemas.microsoft.com/SystemCenter/Common/UI/Views/GridView" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+            <mux:ColumnCollection xmlns:res="clr-namespace:AssetManagementForms:Assembly=AssetManagementForms.Assembly" xmlns:slaBinding="clr-namespace:Microsoft.EnterpriseManagement.ServiceManager.SLA.Common;assembly=Microsoft.EnterpriseManagement.ServiceManager.SLA.Common" xmlns:toolbox="clr-namespace:Microsoft.EnterpriseManagement.UI.WpfToolbox;assembly=Microsoft.EnterpriseManagement.UI.FormsInfra" xmlns:appCommon="clr-namespace:Microsoft.EnterpriseManagement.ServiceManager.Application.Common;assembly=Microsoft.EnterpriseManagement.ServiceManager.Application.Common" xmlns:data="clr-namespace:Microsoft.EnterpriseManagement.UI.Extensions;assembly=Microsoft.EnterpriseManagement.UI.Extensions" xmlns:datebinding="clr-namespace:Microsoft.EnterpriseManagement.UI.Extensions;assembly=Microsoft.EnterpriseManagement.UI.Extensions" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:mux="http://schemas.microsoft.com/SystemCenter/Common/UI/Views/GridView" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
               <mux:Column Name="AssetID" DisplayMemberBinding="{Binding Path=AssetID, Mode=OneWay}" Width="100" DisplayName="AssetID.View.GeneralAssets" Property="AssetID" DataType="s:String" />
               <mux:Column Name="AssetTag" DisplayMemberBinding="{Binding Path=AssetTag, Mode=OneWay}" Width="100" DisplayName="AssetTag.View.GeneralAssets" Property="AssetTag" DataType="s:String" />
               <mux:Column Name="AssetStatus.DisplayName" DisplayMemberBinding="{Binding Path=AssetStatus.DisplayName, Mode=OneWay}" Width="100" DisplayName="AssetStatus.View.GeneralAssets" Property="AssetStatus.DisplayName" DataType="s:String" />
               <mux:Column Name="SerialNumber" DisplayMemberBinding="{Binding Path=SerialNumber, Mode=OneWay}" Width="100" DisplayName="SerialNumber.View.GeneralAssets" Property="SerialNumber" DataType="s:String" />
               <mux:Column Name="AssetManufacturer.DisplayName" DisplayMemberBinding="{Binding Path=AssetManufacturer.DisplayName, Mode=OneWay}" Width="100" DisplayName="AssetManufacturer.View.GeneralAssets" Property="AssetManufacturer.DisplayName" DataType="s:String" />
-              <!--<mux:Column Name="AssetModel.DisplayName" DisplayMemberBinding="{Binding Path=ComponentAlias_b527cd23_9043_48a2_a3c8_111ab26f0a95.AssetModel.DisplayName, Mode=OneWay}" Width="100" DisplayName="AssetModel.View.GeneralAssets" Property="ComponentAlias_b527cd23_9043_48a2_a3c8_111ab26f0a95.AssetModel.DisplayName" DataType="s:String" />-->
-              <mux:Column Name="AssetModel.DisplayName" Width="100" DisplayName="AssetModel.View.GeneralAssets" Property="AssetMode.DisplayName" DataType="s:String">
+              <mux:Column Name="AssetModel.DisplayName" DisplayMemberBinding="{Binding Path=ComponentAlias_b527cd23_9043_48a2_a3c8_111ab26f0a95.AssetModel.DisplayName, Mode=OneWay}" Width="100" DisplayName="AssetModel.View.GeneralAssets" Property="ComponentAlias_b527cd23_9043_48a2_a3c8_111ab26f0a95.AssetModel.DisplayName" DataType="s:String" />
+              <!--<mux:Column Name="AssetModel.DisplayName"  Width="100" DisplayName="AssetModel.View.GeneralAssets" Property="AssetMode.DisplayName" DataType="s:String">
                 <mux:Column.DisplayMemberBinding>
-                  <MultiBinding Converter="{x:res converters:SelectNonNullValueConverter.Default&gt;}">
+                  <MultiBinding Converter="{x:res converters:SelectNonNullValueConverter.Default>}">
                     <Binding Path="ComponentAlias_b527cd23_9043_48a2_a3c8_111ab26f0a95.AssetModel.DisplayName" />
                     <Binding Path="AssetToPeripheral.AssetModel.DisplayName" />
                     <Binding Path="AssetToNetworkInfrastructureAsset.AssetModel.DisplayName" />
                     <Binding Path="AssetToServerInfrastructureAsset.AssetModel.DisplayName" />
                   </MultiBinding>
                 </mux:Column.DisplayMemberBinding>
-              </mux:Column>
+              </mux:Column>-->
               <mux:Column Name="Region.DisplayName" DisplayMemberBinding="{Binding Path=Region.DisplayName, Mode=OneWay}" Width="100" DisplayName="Region.View.GeneralAssets" Property="Region.DisplayName" DataType="s:String" />
               <mux:Column Name="Country.DisplayName" DisplayMemberBinding="{Binding Path=Country.DisplayName, Mode=OneWay}" Width="100" DisplayName="Country.View.GeneralAssets" Property="Country.DisplayName" DataType="s:String" />
               <mux:Column Name="Site.DisplayName" DisplayMemberBinding="{Binding Path=Site.DisplayName, Mode=OneWay}" Width="100" DisplayName="Site.View.GeneralAssets" Property="Site.DisplayName" DataType="s:String" />

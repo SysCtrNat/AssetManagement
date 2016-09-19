@@ -18,7 +18,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\..\..\seal\output\scsm\</OutputPath>
+    <OutputPath>..\..\output\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -33,40 +33,34 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.EnterpriseManagement.ServiceManager.Application.Common">
-      <HintPath>..\..\..\..\Program Files (x86)\Microsoft System Center 2012\Service Manager Authoring\Library\Announcements\Microsoft.EnterpriseManagement.ServiceManager.Application.Common.dll</HintPath>
+      <HintPath>bin\Debug\Microsoft.EnterpriseManagement.ServiceManager.Application.Common.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.EnterpriseManagement.ServiceManager.SharedResources">
-      <HintPath>..\..\..\..\Program Files (x86)\Microsoft System Center 2012\Service Manager Authoring\PackagesToLoad\Microsoft.EnterpriseManagement.ServiceManager.SharedResources.dll</HintPath>
+      <HintPath>bin\Debug\Microsoft.EnterpriseManagement.ServiceManager.SharedResources.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.EnterpriseManagement.UI.ConsoleFramework, Version=7.1.1000.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Program Files (x86)\Microsoft System Center 2012\Service Manager Authoring\PackagesToLoad\Microsoft.EnterpriseManagement.UI.ConsoleFramework.dll</HintPath>
+    <Reference Include="Microsoft.EnterpriseManagement.UI.ConsoleFramework">
+      <HintPath>bin\Debug\Microsoft.EnterpriseManagement.UI.ConsoleFramework.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.EnterpriseManagement.UI.Controls">
-      <HintPath>..\..\..\..\Program Files (x86)\Microsoft System Center 2012\Service Manager Authoring\PackagesToLoad\Microsoft.EnterpriseManagement.UI.Controls.dll</HintPath>
+      <HintPath>bin\Debug\Microsoft.EnterpriseManagement.UI.Controls.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.EnterpriseManagement.UI.Core, Version=7.0.5000.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Program Files (x86)\Microsoft System Center 2012\Service Manager Authoring\PackagesToLoad\Microsoft.EnterpriseManagement.UI.Core.dll</HintPath>
+    <Reference Include="Microsoft.EnterpriseManagement.UI.Core">
+      <HintPath>bin\Debug\Microsoft.EnterpriseManagement.UI.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.EnterpriseManagement.UI.Extensions, Version=7.0.5000.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Program Files (x86)\Microsoft System Center 2012\Service Manager Authoring\PackagesToLoad\Microsoft.EnterpriseManagement.UI.Extensions.dll</HintPath>
+    <Reference Include="Microsoft.EnterpriseManagement.UI.Extensions">
+      <HintPath>bin\Debug\Microsoft.EnterpriseManagement.UI.Extensions.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.EnterpriseManagement.UI.FormsInfra, Version=7.0.5000.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Program Files (x86)\Microsoft System Center 2012\Service Manager Authoring\PackagesToLoad\Microsoft.EnterpriseManagement.UI.FormsInfra.dll</HintPath>
+    <Reference Include="Microsoft.EnterpriseManagement.UI.FormsInfra">
+      <HintPath>bin\Debug\Microsoft.EnterpriseManagement.UI.FormsInfra.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.EnterpriseManagement.UI.Foundation, Version=7.1.1000.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Program Files (x86)\Microsoft System Center 2012\Service Manager Authoring\PackagesToLoad\Microsoft.EnterpriseManagement.UI.Foundation.dll</HintPath>
+    <Reference Include="Microsoft.EnterpriseManagement.UI.Foundation">
+      <HintPath>bin\Debug\Microsoft.EnterpriseManagement.UI.Foundation.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.EnterpriseManagement.UI.SdkDataAccess">
-      <HintPath>..\..\..\SCOM\ManagementPacks\Microsoft.EnterpriseManagement.UI.SdkDataAccess.dll</HintPath>
+    <Reference Include="Microsoft.EnterpriseManagement.UI.SdkDataAccess.Authoring">
+      <HintPath>..\..\..\..\..\Program Files (x86)\Microsoft System Center 2012\Service Manager Authoring\PackagesToLoad\Microsoft.EnterpriseManagement.UI.SdkDataAccess.Authoring.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.EnterpriseManagement.UI.SMControls, Version=7.0.5000.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\SCOM\ManagementPacks\Microsoft.EnterpriseManagement.UI.SMControls.dll</HintPath>
+    <Reference Include="Microsoft.EnterpriseManagement.UI.SMControls">
+      <HintPath>bin\Debug\Microsoft.EnterpriseManagement.UI.SMControls.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -78,7 +72,7 @@
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="WPFToolKit">
-      <HintPath>..\..\..\..\Program Files (x86)\Microsoft System Center 2012\Service Manager Authoring\PackagesToLoad\WPFToolKit.dll</HintPath>
+      <HintPath>bin\Debug\WPFToolKit.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -99,9 +93,6 @@
     </Compile>
     <Compile Include="PeripheralPreview.xaml.cs">
       <DependentUpon>PeripheralPreview.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="MyTemplate.xaml.cs">
-      <DependentUpon>MyTemplate.xaml</DependentUpon>
     </Compile>
     <Compile Include="NetworkInfraStructureAsset.xaml.cs">
       <DependentUpon>NetworkInfraStructureAsset.xaml</DependentUpon>
@@ -166,10 +157,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MyTemplate.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="NetworkInfraStructureAsset.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -190,9 +177,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="CelaneseLogo_NoTag_150px.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

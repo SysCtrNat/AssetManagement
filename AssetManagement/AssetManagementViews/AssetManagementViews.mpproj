@@ -13,12 +13,12 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
-    <OutputPath>C:\Seal\Output\SCSM</OutputPath>
+    <OutputPath>C:\it\Output</OutputPath>
     <GenerateSealed>True</GenerateSealed>
     <Company>Celanese</Company>
     <Copyright>Copyright (c) MyCompany. All rights reserved.</Copyright>
     <DelaySigning>False</DelaySigning>
-    <AssemblyOriginatorKeyFile>C:\Seal\scomkey.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>C:\it\scomkey.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <DebugSymbols>false</DebugSymbols>
