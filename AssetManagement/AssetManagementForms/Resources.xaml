@@ -1,8 +1,0 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:scwpf="http://schemas.microsoft.com/SystemCenter/Common/UI/Wpf" 
-                    xmlns:smcontrols="clr-namespace:Microsoft.EnterpriseManagement.UI.WpfControls;assembly=Microsoft.EnterpriseManagement.UI.SmControls" 
-                    xmlns:wpfToolKit="clr-namespace:Microsoft.Windows.Controls;assembly=wpfToolKit"
-                    xmlns:local="clr-namespace:AssetManagementForms">
-    
-</ResourceDictionary>
