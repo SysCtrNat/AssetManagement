@@ -1,0 +1,1058 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ManagementPackFragment SchemaVersion="SM2.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+  <TypeDefinitions>
+    <EntityTypes>
+      <ClassTypes>
+       <ClassType ID="AssetManagementBaseClass" Accessibility="Public" Abstract="false" Base="SystemHW!System.ComputerHardware" Hosted="false" Singleton="false" Extension="false">
+          <Property ID="AssetID" Type="string" AutoIncrement="true" Key="true" CaseSensitive="false" MaxLength="256" MinLength="1" Required="true" DefaultValue="Asset{0}"/>
+          <Property ID="AssetTag" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false"/>
+          <Property ID="SerialNumber" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="50" MinLength="1" Required="true" />
+          <Property ID="AssetManufacturer" Type="enum" EnumType="AssetManagement.Manufacturer.Enum"/>
+          <Property ID="EquipmentCost" Type="decimal" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="38" MinLength="0" Required="false" /> 
+          <Property ID="GoodsReceivedDate" Type="datetime" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" />
+          <Property ID="WarrantyExpirationDate" Type="datetime" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" />
+          <Property ID="WarrantySLA" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" />
+          <Property ID="MaintenanceExpirationDate" Type="datetime" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" />
+          <Property ID="MaintenanceContractReferenceNumber" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" />
+          <Property ID="Region" Type="enum" EnumType="AssetManagement.Region.Enum"/>
+          <Property ID="Country" Type="enum" EnumType="AssetManagement.Country.Enum"/>
+          <Property ID="Site" Type="enum" EnumType="AssetManagement.Site.Enum"/>
+          <Property ID="Location" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" />
+        </ClassType>
+        <ClassType ID="Peripheral" Accessibility="Public" Abstract="false" Base="AssetManagementBaseClass" Hosted="false" Singleton="false" Extension="false">
+          <Property ID="AssetModel" Type="enum" EnumType="AssetManagement.Peripheral.Model.Enum"/>
+          <Property ID="Type" Type="enum" EnumType="AssetManagement.Peripheral.Type.Enum"/>
+        </ClassType>
+        <ClassType ID="OrderBaseClass" Accessibility="Public" Abstract="false" Base="System!System.ConfigItem" Hosted="false" Singleton="false" Extension="false">
+          <Property ID="OrderNumber" Type="string" AutoIncrement="false" Key="true" CaseSensitive="false" MaxLength="20" MinLength="1" Required="false" MinValue="1" MaxValue="99999" />
+          <Property ID="OrderDate" Type="datetime" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" />
+          <Property ID="Supplier" Type="enum" EnumType="AssetManagement.Suppliers.Enum"/>
+          <Property ID="CostCenter" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" />
+          <Property ID="Department" Type="enum" EnumType="AssetManagement.Department.Enum"/>
+        </ClassType>
+        <ClassType ID="NetworkInfrastructureAsset" Accessibility="Public" Abstract="false" Base="AssetManagementBaseClass" Hosted="false" Singleton="false" Extension="false">
+          <Property ID="AssetModel" Type="enum" EnumType="AssetManagement.NetworkInfrastructure.Model.Enum"/>
+          <Property ID="Type" Type="enum" EnumType="AssetManagement.NetworkInfrastructure.Type.Enum"/>
+        </ClassType>
+        <ClassType ID="ServerInfrastructureAsset" Accessibility="Public" Abstract="false" Base="AssetManagementBaseClass" Hosted="false" Singleton="false" Extension="false">
+          <Property ID="AssetModel" Type="enum" EnumType="AssetManagement.ServerInfrastructure.Model.Enum"/>
+          <Property ID="Type" Type="enum" EnumType="AssetManagement.ServerInfrastructure.Type.Enum"/>
+        </ClassType>
+        <ClassType ID="ComputerAsset" Accessibility="Public" Abstract="false" Base="AssetManagementBaseClass" Hosted="false" Singleton="false" Extension="false">
+          <Property ID="AssetModel" Type="enum" EnumType="AssetManagement.Computer.Model.Enum"/>
+          <Property ID="Category" Type="enum" EnumType="AssetManagement.Computer.Category.Enum"/>
+          <Property ID="Type" Type="enum" EnumType="AssetManagement.Computer.Type.Enum"/>
+        </ClassType>
+        <ClassType ID="AssetManagement.AssetsGroup" Accessibility="Public" Abstract="false" Base="InstanceGroup!Microsoft.SystemCenter.ConfigItemGroup" Hosted="false" Singleton="true" Extension="false" />
+        <ClassType ID="AssetManagement.ComputerAssetsGroup" Accessibility="Public" Abstract="false" Base="InstanceGroup!Microsoft.SystemCenter.ConfigItemGroup" Hosted="false" Singleton="true" Extension="false" />
+        <ClassType ID="AssetManagement.PeripheralsGroup" Accessibility="Public" Abstract="false" Base="InstanceGroup!Microsoft.SystemCenter.ConfigItemGroup" Hosted="false" Singleton="true" Extension="false" />
+        <ClassType ID="AssetManagement.NetworkInfrastructureAssetsGroup" Accessibility="Public" Abstract="false" Base="InstanceGroup!Microsoft.SystemCenter.ConfigItemGroup" Hosted="false" Singleton="true" Extension="false" />
+        <ClassType ID="AssetManagement.ServerInfrastructureAssetsGroup" Accessibility="Public" Abstract="false" Base="InstanceGroup!Microsoft.SystemCenter.ConfigItemGroup" Hosted="false" Singleton="true" Extension="false" />
+        <ClassType ID="AssetManagement.OrdersGroup" Accessibility="Public" Abstract="false" Base="InstanceGroup!Microsoft.SystemCenter.ConfigItemGroup" Hosted="false" Singleton="true" Extension="false" />
+        <ClassType ID="AssetManagement.WindowsComputersGroup" Accessibility="Public" Abstract="false" Base="InstanceGroup!Microsoft.SystemCenter.ConfigItemGroup" Hosted="false" Singleton="true" Extension="false" />
+        <ClassType ID="AssetManagement.ADUsersGroup" Accessibility="Public" Abstract="false" Base="InstanceGroup!Microsoft.SystemCenter.ConfigItemGroup" Hosted="false" Singleton="true" Extension="false" />
+      </ClassTypes>
+      <RelationshipTypes>
+        <RelationshipType ID="AssetToOrderRelationship" Accessibility="Public" Abstract="false" Base="System!System.Reference">
+          <Source ID="Source_OrderNumber" MinCardinality="0" MaxCardinality="2147483647" Type="AssetManagementBaseClass" />
+          <Target ID="Target_OrderNumber" MinCardinality="0" MaxCardinality="1" Type="OrderBaseClass" />
+        </RelationshipType>
+        <RelationshipType ID="AssetToComputerAssetRelationship" Accessibility="Public" Abstract="false" Base="System!System.Reference">
+          <Source ID="Source_AssetBase" MinCardinality="0" MaxCardinality="1" Type="AssetManagementBaseClass" />
+          <Target ID="Target_ComputerAsset" MinCardinality="0" MaxCardinality="1" Type="ComputerAsset" />
+        </RelationshipType>
+        <RelationshipType ID="AssetToPeripheralRelationship" Accessibility="Public" Abstract="false" Base="System!System.Reference">
+          <Source ID="Source_AssetBase" MinCardinality="0" MaxCardinality="1" Type="AssetManagementBaseClass" />
+          <Target ID="Target_Peripheral" MinCardinality="0" MaxCardinality="1" Type="Peripheral" />
+        </RelationshipType>
+        <RelationshipType ID="AssetToNetworkInfrastructureAssetRelationship" Accessibility="Public" Abstract="false" Base="System!System.Reference">
+          <Source ID="Source_AssetBase" MinCardinality="0" MaxCardinality="1" Type="AssetManagementBaseClass" />
+          <Target ID="Target_NetworkInfrastructureAsset" MinCardinality="0" MaxCardinality="1" Type="NetworkInfrastructureAsset" />
+        </RelationshipType>
+        <RelationshipType ID="AssetToServerInfrastructureAssetRelationship" Accessibility="Public" Abstract="false" Base="System!System.Reference">
+          <Source ID="Source_AssetBase" MinCardinality="0" MaxCardinality="1" Type="AssetManagementBaseClass" />
+          <Target ID="Target_ServerInfrastructureAsset" MinCardinality="0" MaxCardinality="1" Type="ServerInfrastructureAsset" />
+        </RelationshipType>
+        <RelationshipType ID="AssetToCustodianRelationShip" Accessibility="Public" Abstract="false" Base="System!System.Reference">
+          <Source ID="Source_Asset" MinCardinality="0" MaxCardinality="2147483647" Type="AssetManagementBaseClass" />
+          <Target ID="Target_User" MinCardinality="0" MaxCardinality="1" Type="Windows!Microsoft.AD.User" />
+        </RelationshipType>
+      </RelationshipTypes>
+      <EnumerationTypes>
+        <EnumerationValue ID="AssetManagement.Manufacturer.Enum" Accessibility="Public" />
+        <EnumerationValue ID="AssetManagement.Suppliers.Enum" Accessibility="Public" />
+        <EnumerationValue ID="AssetManagement.Department.Enum" Accessibility="Public" />
+        <EnumerationValue ID="AssetManagement.Computer.Model.Enum" Accessibility="Public" />
+        <EnumerationValue ID="AssetManagement.Peripheral.Model.Enum" Accessibility="Public" />
+        <EnumerationValue ID="AssetManagement.ServerInfrastructure.Model.Enum" Accessibility="Public" />
+        <EnumerationValue ID="AssetManagement.NetworkInfrastructure.Model.Enum" Accessibility="Public" />
+        <EnumerationValue ID="AssetManagement.Region.Enum" Accessibility="Public" />
+        <EnumerationValue ID="AssetManagement.Country.Enum" Accessibility="Public" />
+        <EnumerationValue ID="AssetManagement.Site.Enum" Accessibility="Public" />
+        <EnumerationValue ID="AssetManagement.Computer.Category.Enum" Accessibility="Public" />
+        <EnumerationValue ID="AssetManagement.Computer.Type.Enum" Accessibility="Public" />
+        <EnumerationValue ID="AssetManagement.Peripheral.Type.Enum" Accessibility="Public" />
+        <EnumerationValue ID="AssetManagement.NetworkInfrastructure.Type.Enum" Accessibility="Public" />
+        <EnumerationValue ID="AssetManagement.ServerInfrastructure.Type.Enum" Accessibility="Public" />
+        <EnumerationValue ID="System.ConfigItem.AssetStatusEnum.InStock" Parent="System!System.ConfigItem.AssetStatusEnum" Accessibility="Public" />
+        <EnumerationValue ID="System.ConfigItem.AssetStatusEnum.Repair" Parent="System!System.ConfigItem.AssetStatusEnum" Accessibility="Public" />
+        <EnumerationValue ID="System.ConfigItem.AssetStatusEnum.Stolen" Parent="System!System.ConfigItem.AssetStatusEnum" Accessibility="Public" />
+      </EnumerationTypes>
+      <TypeProjections>
+        <TypeProjection ID="ComputerAsset.TypeProjection" Accessibility="Public" Type="ComputerAsset">
+          <Component Path="$Context/Path[Relationship='AssetToCustodianRelationShip']$" Alias="ComponentAlias_d5fb8379_ba30_4351_9e9a_ec9fbd9a3b65" />
+        </TypeProjection>
+        <TypeProjection ID="Order.TypeProjection" Accessibility="Public" Type="OrderBaseClass">
+          <Component Path="$Context/Path[Relationship='AssetToOrderRelationship' SeedRole='Target']$" Alias="RelatedConfigItems" />
+        </TypeProjection>
+        <TypeProjection ID="Peripheral.TypeProjection" Accessibility="Public" Type="Peripheral">
+          <Component Path="$Context/Path[Relationship='AssetToCustodianRelationShip']$" Alias="ComponentAlias_d5fb8379_ba30_4351_9e9a_ec9fbd9a3b65" />
+        </TypeProjection>
+        <TypeProjection ID="NetworkInfrastructureAsset.TypeProjection" Accessibility="Public" Type="NetworkInfrastructureAsset">
+          <Component Path="$Context/Path[Relationship='AssetToCustodianRelationShip']$" Alias="ComponentAlias_d5fb8379_ba30_4351_9e9a_ec9fbd9a3b65" />
+        </TypeProjection>
+        <TypeProjection ID="ServerInfrastructureAsset.TypeProjection" Accessibility="Public" Type="ServerInfrastructureAsset">
+          <Component Path="$Context/Path[Relationship='AssetToCustodianRelationShip']$" Alias="ComponentAlias_d5fb8379_ba30_4351_9e9a_ec9fbd9a3b65" />
+        </TypeProjection>
+        <TypeProjection ID="Peripheral.Form.TypeProjection" Accessibility="Public" Type="Peripheral">
+          <Component Path="$Context/Path[Relationship='AssetToCustodianRelationShip']$" Alias="ComponentAlias_d5fb8379_ba30_4351_9e9a_ec9fbd9a3b65" />
+          <Component Path="$Context/Path[Relationship='System!System.ConfigItemOwnedByUser']$" Alias="ComputerAssetOwnedByUser" />
+          <Component Path="$Context/Path[Relationship='WorkItem!System.WorkItemRelatesToConfigItem' SeedRole='Target']$" Alias="ImpactedWorkItem" />
+          <Component Path="$Context/Path[Relationship='WorkItem!System.WorkItemAboutConfigItem' SeedRole='Target']$" Alias="RelatedWorkItem" />
+          <Component Path="$Context/Path[Relationship='SupportingItem!System.ConfigItemHasFileAttachment']$" Alias="FileAttachment" />
+          <Component Path="$Context/Path[Relationship='System!System.ConfigItemRelatesToConfigItem']$" Alias="RelatedConfigItem" />
+          <Component Path="$Context/Path[Relationship='System!System.ConfigItemRelatesToConfigItem' SeedRole='Target']$" Alias="RelatedConfigItemSource" />
+          <Component Path="$Context/Path[Relationship='CoreKnowledge!System.EntityLinksToKnowledgeDocument']$" Alias="RelatedKnowledgeArticles" />
+        </TypeProjection>
+        <TypeProjection ID="NetworkInfraStructureAsset.Form.TypeProjection" Accessibility="Public" Type="NetworkInfrastructureAsset">
+          <Component Path="$Context/Path[Relationship='AssetToCustodianRelationShip']$" Alias="ComponentAlias_d5fb8379_ba30_4351_9e9a_ec9fbd9a3b65" />
+          <Component Path="$Context/Path[Relationship='System!System.ConfigItemOwnedByUser']$" Alias="ComputerAssetOwnedByUser" />
+          <Component Path="$Context/Path[Relationship='WorkItem!System.WorkItemRelatesToConfigItem' SeedRole='Target']$" Alias="ImpactedWorkItem" />
+          <Component Path="$Context/Path[Relationship='WorkItem!System.WorkItemAboutConfigItem' SeedRole='Target']$" Alias="RelatedWorkItem" />
+          <Component Path="$Context/Path[Relationship='SupportingItem!System.ConfigItemHasFileAttachment']$" Alias="FileAttachment" />
+          <Component Path="$Context/Path[Relationship='System!System.ConfigItemRelatesToConfigItem']$" Alias="RelatedConfigItem" />
+          <Component Path="$Context/Path[Relationship='System!System.ConfigItemRelatesToConfigItem' SeedRole='Target']$" Alias="RelatedConfigItemSource" />
+          <Component Path="$Context/Path[Relationship='CoreKnowledge!System.EntityLinksToKnowledgeDocument']$" Alias="RelatedKnowledgeArticles" />
+        </TypeProjection>
+        <TypeProjection ID="ServerInfraStructureAsset.Form.TypeProjection" Accessibility="Public" Type="ServerInfrastructureAsset">
+          <Component Path="$Context/Path[Relationship='AssetToCustodianRelationShip']$" Alias="ComponentAlias_d5fb8379_ba30_4351_9e9a_ec9fbd9a3b65" />
+          <Component Path="$Context/Path[Relationship='System!System.ConfigItemOwnedByUser']$" Alias="ComputerAssetOwnedByUser" />
+          <Component Path="$Context/Path[Relationship='WorkItem!System.WorkItemRelatesToConfigItem' SeedRole='Target']$" Alias="ImpactedWorkItem" />
+          <Component Path="$Context/Path[Relationship='WorkItem!System.WorkItemAboutConfigItem' SeedRole='Target']$" Alias="RelatedWorkItem" />
+          <Component Path="$Context/Path[Relationship='SupportingItem!System.ConfigItemHasFileAttachment']$" Alias="FileAttachment" />
+          <Component Path="$Context/Path[Relationship='System!System.ConfigItemRelatesToConfigItem']$" Alias="RelatedConfigItem" />
+          <Component Path="$Context/Path[Relationship='System!System.ConfigItemRelatesToConfigItem' SeedRole='Target']$" Alias="RelatedConfigItemSource" />
+          <Component Path="$Context/Path[Relationship='CoreKnowledge!System.EntityLinksToKnowledgeDocument']$" Alias="RelatedKnowledgeArticles" />
+        </TypeProjection>
+        <TypeProjection ID="GeneralAsset.View.TypeProjection" Accessibility="Public" Type="AssetManagementBaseClass">
+          <Component Path="$Context/Path[Relationship='AssetToCustodianRelationShip']$" Alias="ComponentAlias_d5fb8379_ba30_4351_9e9a_ec9fbd9a3b65" />
+          <Component Path="$Context/Path[Relationship='AssetToComputerAssetRelationship' SeedRole='Source']$" Alias="ComputerAssetRelatedConfigItem" />
+        </TypeProjection>
+        <TypeProjection ID="Order.View.TypeProjection" Accessibility="Public" Type="OrderBaseClass">
+          <Component Path="$Context/Path[Relationship='AssetToOrderRelationship' SeedRole='Target']$" Alias="RelatedAsset" />
+          <Component Path="$Context/Path[Relationship='WorkItem!System.WorkItemRelatesToConfigItem' SeedRole='Target']$" Alias="ImpactedWorkItem" />
+          <Component Path="$Context/Path[Relationship='WorkItem!System.WorkItemAboutConfigItem' SeedRole='Target']$" Alias="RelatedWorkItem" />
+          <Component Path="$Context/Path[Relationship='SupportingItem!System.ConfigItemHasFileAttachment']$" Alias="FileAttachment" />
+          <Component Path="$Context/Path[Relationship='System!System.ConfigItemRelatesToConfigItem']$" Alias="RelatedConfigItem" />
+          <Component Path="$Context/Path[Relationship='System!System.ConfigItemRelatesToConfigItem' SeedRole='Target']$" Alias="RelatedConfigItemSource" />
+          <Component Path="$Context/Path[Relationship='CoreKnowledge!System.EntityLinksToKnowledgeDocument']$" Alias="RelatedKnowledgeArticles" />
+        </TypeProjection>
+        <TypeProjection ID="AllComputers.View.ProjectionType" Accessibility="Public" Type="Windows!Microsoft.Windows.Computer">
+          <Component Path="$Context/Path[Relationship='ConfigurationManager!Microsoft.SystemCenter.ConfigurationManager.DeployedComputerRunsWindowsComputer' SeedRole='Target']$" Alias="PhysicalComputer" />
+          <Component Path="$Context/Path[Relationship='Windows!Microsoft.Windows.ComputerHostsOperatingSystem']$" Alias="OperatingSystem" />
+          <Component Path="$Context/Path[Relationship='System!System.ConfigItemOwnedByUser']$" Alias="ComputerOwnedByUser" />
+        </TypeProjection>
+        <TypeProjection ID="ComputerAsset.Form.TypeProjection" Accessibility="Public" Type="ComputerAsset">
+          <Component Path="$Context/Path[Relationship='AssetToCustodianRelationShip']$" Alias="ComponentAlias_d5fb8379_ba30_4351_9e9a_ec9fbd9a3b65" />
+          <Component Path="$Context/Path[Relationship='System!System.ConfigItemOwnedByUser']$" Alias="ComputerAssetOwnedByUser" />
+          <Component Path="$Context/Path[Relationship='WorkItem!System.WorkItemRelatesToConfigItem' SeedRole='Target']$" Alias="ImpactedWorkItem" />
+          <Component Path="$Context/Path[Relationship='WorkItem!System.WorkItemAboutConfigItem' SeedRole='Target']$" Alias="RelatedWorkItem" />
+          <Component Path="$Context/Path[Relationship='SupportingItem!System.ConfigItemHasFileAttachment']$" Alias="FileAttachment" />
+          <Component Path="$Context/Path[Relationship='System!System.ConfigItemRelatesToConfigItem']$" Alias="RelatedConfigItem" />
+          <Component Path="$Context/Path[Relationship='System!System.ConfigItemRelatesToConfigItem' SeedRole='Target']$" Alias="RelatedConfigItemSource" />
+          <Component Path="$Context/Path[Relationship='CoreKnowledge!System.EntityLinksToKnowledgeDocument']$" Alias="RelatedKnowledgeArticles" />
+        </TypeProjection>
+        <TypeProjection ID="GeneralAsset_TypeProjection" Accessibility="Public" Type="AssetManagementBaseClass">
+          <Component Path="$Context/Path[Relationship='AssetToComputerAssetRelationship']$" Alias="ComponentAlias_b527cd23_9043_48a2_a3c8_111ab26f0a95" />
+          <Component Path="$Context/Path[Relationship='AssetToPeripheralRelationship']$" Alias="AssetToPeripheral" />
+          <Component Path="$Context/Path[Relationship='AssetToNetworkInfrastructureAssetRelationship']$" Alias="AssetToNetworkInfrastructureAsset" />
+          <Component Path="$Context/Path[Relationship='AssetToServerInfrastructureAssetRelationship']$" Alias="AssetToServerInfrastructureAsset" />
+          <Component Path="$Context/Path[Relationship='AssetToCustodianRelationShip']$" Alias="ComponentAlias_b1f46e16_e9a0_49af_b9f5_1c9d4bb532d1" />
+          <Component Path="$Context/Path[Relationship='System!System.ConfigItemOwnedByUser']$" Alias="AssetOwnedByUser" />
+          <Component Path="$Context/Path[Relationship='WorkItem!System.WorkItemRelatesToConfigItem' SeedRole='Target']$" Alias="ImpactedWorkItem" />
+          <Component Path="$Context/Path[Relationship='WorkItem!System.WorkItemAboutConfigItem' SeedRole='Target']$" Alias="RelatedWorkItem" />
+          <Component Path="$Context/Path[Relationship='SupportingItem!System.ConfigItemHasFileAttachment']$" Alias="FileAttachment" />
+          <Component Path="$Context/Path[Relationship='System!System.ConfigItemRelatesToConfigItem']$" Alias="RelatedConfigItem" />
+          <Component Path="$Context/Path[Relationship='System!System.ConfigItemRelatesToConfigItem' SeedRole='Target']$" Alias="RelatedConfigItemSource" />
+          <Component Path="$Context/Path[Relationship='CoreKnowledge!System.EntityLinksToKnowledgeDocument']$" Alias="RelatedKnowledgeArticles" />
+        </TypeProjection>
+      </TypeProjections>
+    </EntityTypes>
+  </TypeDefinitions>
+  <Categories>
+    <Category ID="Category.ManagementPackName" Value="Console!Microsoft.EnterpriseManagement.ServiceManager.ManagementPack">
+      <ManagementPackName>AssetManagement</ManagementPackName>
+      <ManagementPackVersion>1.0.0.1</ManagementPackVersion>
+      <ManagementPackPublicKeyToken>7d57b1335ea864b0</ManagementPackPublicKeyToken>
+    </Category>
+    <Category ID="AssetManagement.AssetManufacturerCategory" Target="AssetManagement.Manufacturer.Enum" Value="UIAuthoring!Microsoft.EnterpriseManagement.ServiceManager.UI.Authoring.EnumerationViewTasks" />
+    <Category ID="AssetManagement.AssetManufacturerViewCategory" Target="AssetManagement.Manufacturer.Enum" Value="System!VisibleToUser" />
+    <Category ID="AssetManagement.SuppliersCategory" Target="AssetManagement.Suppliers.Enum" Value="UIAuthoring!Microsoft.EnterpriseManagement.ServiceManager.UI.Authoring.EnumerationViewTasks" />
+    <Category ID="AssetManagement.SuppliersViewCategory" Target="AssetManagement.Suppliers.Enum" Value="System!VisibleToUser" />
+    <Category ID="AssetManagement.DepartmentCategory" Target="AssetManagement.Department.Enum" Value="UIAuthoring!Microsoft.EnterpriseManagement.ServiceManager.UI.Authoring.EnumerationViewTasks" />
+    <Category ID="AssetManagement.DepartmentViewCategory" Target="AssetManagement.Department.Enum" Value="System!VisibleToUser" />
+    <Category ID="AssetManagement.RegionCategory" Target="AssetManagement.Region.Enum" Value="UIAuthoring!Microsoft.EnterpriseManagement.ServiceManager.UI.Authoring.EnumerationViewTasks" />
+    <Category ID="AssetManagement.RegionViewCategory" Target="AssetManagement.Region.Enum" Value="System!VisibleToUser" />
+    <Category ID="AssetManagement.CountryCategory" Target="AssetManagement.Country.Enum" Value="UIAuthoring!Microsoft.EnterpriseManagement.ServiceManager.UI.Authoring.EnumerationViewTasks" />
+    <Category ID="AssetManagement.CountryViewCategory" Target="AssetManagement.Country.Enum" Value="System!VisibleToUser" />
+    <Category ID="AssetManagement.SiteCategory" Target="AssetManagement.Site.Enum" Value="UIAuthoring!Microsoft.EnterpriseManagement.ServiceManager.UI.Authoring.EnumerationViewTasks" />
+    <Category ID="AssetManagement.SiteViewCategory" Target="AssetManagement.Site.Enum" Value="System!VisibleToUser" />
+    <Category ID="AssetManagement.ComputerModelCategory" Target="AssetManagement.Computer.Model.Enum" Value="UIAuthoring!Microsoft.EnterpriseManagement.ServiceManager.UI.Authoring.EnumerationViewTasks" />
+    <Category ID="AssetManagement.ComputerModelViewCategory" Target="AssetManagement.Computer.Model.Enum" Value="System!VisibleToUser" />
+    <Category ID="AssetManagement.ComputerCategoryCategory" Target="AssetManagement.Computer.Category.Enum" Value="UIAuthoring!Microsoft.EnterpriseManagement.ServiceManager.UI.Authoring.EnumerationViewTasks" />
+    <Category ID="AssetManagement.ComputerCategoryViewCategory" Target="AssetManagement.Computer.Category.Enum" Value="System!VisibleToUser" />
+    <Category ID="AssetManagement.ComputerTypeCategory" Target="AssetManagement.Computer.Type.Enum" Value="UIAuthoring!Microsoft.EnterpriseManagement.ServiceManager.UI.Authoring.EnumerationViewTasks" />
+    <Category ID="AssetManagement.ComputerTypeViewCategory" Target="AssetManagement.Computer.Type.Enum" Value="System!VisibleToUser" />
+    <Category ID="AssetManagement.PeripheralModelCategory" Target="AssetManagement.Peripheral.Model.Enum" Value="UIAuthoring!Microsoft.EnterpriseManagement.ServiceManager.UI.Authoring.EnumerationViewTasks" />
+    <Category ID="AssetManagement.PeripheralModelViewCategory" Target="AssetManagement.Peripheral.Model.Enum" Value="System!VisibleToUser" />
+    <Category ID="AssetManagement.PeripheralTypeCategory" Target="AssetManagement.Peripheral.Type.Enum" Value="UIAuthoring!Microsoft.EnterpriseManagement.ServiceManager.UI.Authoring.EnumerationViewTasks" />
+    <Category ID="AssetManagement.PeripheralTypeViewCategory" Target="AssetManagement.Peripheral.Type.Enum" Value="System!VisibleToUser" />
+    <Category ID="AssetManagement.NetworkInfrastructureModelCategory" Target="AssetManagement.NetworkInfrastructure.Model.Enum" Value="UIAuthoring!Microsoft.EnterpriseManagement.ServiceManager.UI.Authoring.EnumerationViewTasks" />
+    <Category ID="AssetManagement.NetworkInfrastructureModelViewCategory" Target="AssetManagement.NetworkInfrastructure.Model.Enum" Value="System!VisibleToUser" />
+    <Category ID="AssetManagement.NetworkInfrastructureTypeCategory" Target="AssetManagement.NetworkInfrastructure.Type.Enum" Value="UIAuthoring!Microsoft.EnterpriseManagement.ServiceManager.UI.Authoring.EnumerationViewTasks" />
+    <Category ID="AssetManagement.NetworkInfrastructureTypeViewCategory" Target="AssetManagement.NetworkInfrastructure.Type.Enum" Value="System!VisibleToUser" />
+    <Category ID="AssetManagement.ServerInfrastructureModelCategory" Target="AssetManagement.ServerInfrastructure.Model.Enum" Value="UIAuthoring!Microsoft.EnterpriseManagement.ServiceManager.UI.Authoring.EnumerationViewTasks" />
+    <Category ID="AssetManagement.ServerInfrastructureModelViewCategory" Target="AssetManagement.ServerInfrastructure.Model.Enum" Value="System!VisibleToUser" />
+    <Category ID="AssetManagement.ServerInfrastructureTypeCategory" Target="AssetManagement.ServerInfrastructure.Type.Enum" Value="UIAuthoring!Microsoft.EnterpriseManagement.ServiceManager.UI.Authoring.EnumerationViewTasks" />
+    <Category ID="AssetManagement.ServerInfrastructureTypeViewCategory" Target="AssetManagement.ServerInfrastructure.Type.Enum" Value="System!VisibleToUser" />
+    <Category ID="AssetManagement.ComputerAsset.Preview" Target="AssetManagementForms.Computer.Preview" Value="Console!Microsoft.EnterpriseManagement.ServiceManager.UI.Console.OverviewForm" />
+    <Category ID="AssetManagement.Peripheral.Preview" Target="AssetManagementForms.Peripheral.Preview" Value="Console!Microsoft.EnterpriseManagement.ServiceManager.UI.Console.OverviewForm" />
+    <Category ID="AssetManagement.ServerInfraStructureAsset.Preview" Target="AssetManagementForms.ServerInfraStructureAsset.Preview" Value="Console!Microsoft.EnterpriseManagement.ServiceManager.UI.Console.OverviewForm" />
+    <Category ID="AssetManagement.NetworkInfraStructureAsset.Preview" Target="AssetManagementForms.NetworkInfraStructureAsset.Preview" Value="Console!Microsoft.EnterpriseManagement.ServiceManager.UI.Console.OverviewForm" />
+    <Category ID="AssetManagement.Order.Preview" Target="AssetManagementForms.Order.Preview" Value="Console!Microsoft.EnterpriseManagement.ServiceManager.UI.Console.OverviewForm" />
+    <!--<Category ID="AssetManagement.ComputerAsset.DisablePreview" Target="AssetManagementForms.Computer" Value="Administration!Microsoft.EnterpriseManagement.ServiceManager.UI.Administration.Enumeration.HideDetailsPane" />
+    <Category ID="AssetManagement.Peripheral.DisablePreview" Target="Peripheral.Form.TypeProjection" Value="Administration!Microsoft.EnterpriseManagement.ServiceManager.UI.Administration.Enumeration.HideDetailsPane" />
+    <Category ID="AssetManagement.ServerInfraStructureAsset.DisablePreview" Target="ServerInfraStructureAsset.Form.TypeProjection" Value="Administration!Microsoft.EnterpriseManagement.ServiceManager.UI.Administration.Enumeration.HideDetailsPane" />
+    <Category ID="AssetManagement.NetworkInfraStructureAsset.DisablePreview" Target="NetworkInfraStructureAsset.Form.TypeProjection" Value="Administration!Microsoft.EnterpriseManagement.ServiceManager.UI.Administration.Enumeration.HideDetailsPane" />
+    <Category ID="AssetManagement.Order.DisablePreview" Target="Order.TypeProjection" Value="Administration!Microsoft.EnterpriseManagement.ServiceManager.UI.Administration.Enumeration.HideDetailsPane" />
+    -->
+  </Categories>
+  <Monitoring>
+    <Discoveries>
+      <Discovery ID="AssetManagement.AssetsGroup.Discovery" Enabled="true" Target="AssetManagement.AssetsGroup" ConfirmDelivery="false" Remotable="true" Priority="Normal">
+        <Category>Discovery</Category>
+        <DiscoveryTypes>
+          <DiscoveryRelationship TypeID="InstanceGroup!Microsoft.SystemCenter.InstanceGroupContainsEntities" />
+        </DiscoveryTypes>
+        <DataSource ID="GroupPopulationDataSource" TypeID="SystemCenter!Microsoft.SystemCenter.GroupPopulator">
+          <RuleId>$MPElement$</RuleId>
+          <GroupInstanceId>$MPElement[Name="AssetManagement.AssetsGroup"]$</GroupInstanceId>
+          <MembershipRules>
+            <MembershipRule>
+              <MonitoringClass>$MPElement[Name="AssetManagementBaseClass"]$</MonitoringClass>
+              <RelationshipClass>$MPElement[Name="InstanceGroup!Microsoft.SystemCenter.InstanceGroupContainsEntities"]$</RelationshipClass>
+              <Expression>
+                <UnaryExpression>
+                  <ValueExpression>
+                    <Property>$Context/Property[Type='AssetManagementBaseClass']/AssetID$</Property>
+                  </ValueExpression>
+                  <Operator>IsNotNull</Operator>
+                </UnaryExpression>
+              </Expression>
+            </MembershipRule>
+          </MembershipRules>
+        </DataSource>
+      </Discovery>
+      <Discovery ID="AssetManagement.ComputerAssetsGroup.Discovery" Enabled="true" Target="AssetManagement.ComputerAssetsGroup" ConfirmDelivery="false" Remotable="true" Priority="Normal">
+        <Category>Discovery</Category>
+        <DiscoveryTypes>
+          <DiscoveryRelationship TypeID="InstanceGroup!Microsoft.SystemCenter.InstanceGroupContainsEntities" />
+        </DiscoveryTypes>
+        <DataSource ID="GroupPopulationDataSource" TypeID="SystemCenter!Microsoft.SystemCenter.GroupPopulator">
+          <RuleId>$MPElement$</RuleId>
+          <GroupInstanceId>$MPElement[Name="AssetManagement.ComputerAssetsGroup"]$</GroupInstanceId>
+          <MembershipRules>
+            <MembershipRule>
+              <MonitoringClass>$MPElement[Name="ComputerAsset"]$</MonitoringClass>
+              <RelationshipClass>$MPElement[Name="InstanceGroup!Microsoft.SystemCenter.InstanceGroupContainsEntities"]$</RelationshipClass>
+              <Expression>
+                <UnaryExpression>
+                  <ValueExpression>
+                    <Property>$Context/Property[Type='AssetManagementBaseClass']/AssetID$</Property>
+                  </ValueExpression>
+                  <Operator>IsNotNull</Operator>
+                </UnaryExpression>
+              </Expression>
+            </MembershipRule>
+          </MembershipRules>
+        </DataSource>
+      </Discovery>
+      <Discovery ID="AssetManagement.PeripheralsGroup.Discovery" Enabled="true" Target="AssetManagement.PeripheralsGroup" ConfirmDelivery="false" Remotable="true" Priority="Normal">
+        <Category>Discovery</Category>
+        <DiscoveryTypes>
+          <DiscoveryRelationship TypeID="InstanceGroup!Microsoft.SystemCenter.InstanceGroupContainsEntities" />
+        </DiscoveryTypes>
+        <DataSource ID="GroupPopulationDataSource" TypeID="SystemCenter!Microsoft.SystemCenter.GroupPopulator">
+          <RuleId>$MPElement$</RuleId>
+          <GroupInstanceId>$MPElement[Name="AssetManagement.PeripheralsGroup"]$</GroupInstanceId>
+          <MembershipRules>
+            <MembershipRule>
+              <MonitoringClass>$MPElement[Name="Peripheral"]$</MonitoringClass>
+              <RelationshipClass>$MPElement[Name="InstanceGroup!Microsoft.SystemCenter.InstanceGroupContainsEntities"]$</RelationshipClass>
+              <Expression>
+                <UnaryExpression>
+                  <ValueExpression>
+                    <Property>$Context/Property[Type='AssetManagementBaseClass']/AssetID$</Property>
+                  </ValueExpression>
+                  <Operator>IsNotNull</Operator>
+                </UnaryExpression>
+              </Expression>
+            </MembershipRule>
+          </MembershipRules>
+        </DataSource>
+      </Discovery>
+      <Discovery ID="AssetManagement.ServerInfrastructureAssetsGroup.Discovery" Enabled="true" Target="AssetManagement.ServerInfrastructureAssetsGroup" ConfirmDelivery="false" Remotable="true" Priority="Normal">
+        <Category>Discovery</Category>
+        <DiscoveryTypes>
+          <DiscoveryRelationship TypeID="InstanceGroup!Microsoft.SystemCenter.InstanceGroupContainsEntities" />
+        </DiscoveryTypes>
+        <DataSource ID="GroupPopulationDataSource" TypeID="SystemCenter!Microsoft.SystemCenter.GroupPopulator">
+          <RuleId>$MPElement$</RuleId>
+          <GroupInstanceId>$MPElement[Name="AssetManagement.ServerInfrastructureAssetsGroup"]$</GroupInstanceId>
+          <MembershipRules>
+            <MembershipRule>
+              <MonitoringClass>$MPElement[Name="ServerInfrastructureAsset"]$</MonitoringClass>
+              <RelationshipClass>$MPElement[Name="InstanceGroup!Microsoft.SystemCenter.InstanceGroupContainsEntities"]$</RelationshipClass>
+              <Expression>
+                <UnaryExpression>
+                  <ValueExpression>
+                    <Property>$Context/Property[Type='AssetManagementBaseClass']/AssetID$</Property>
+                  </ValueExpression>
+                  <Operator>IsNotNull</Operator>
+                </UnaryExpression>
+              </Expression>
+            </MembershipRule>
+          </MembershipRules>
+        </DataSource>
+      </Discovery>
+      <Discovery ID="AssetManagement.NetworkInfrastructureAssetsGroup.Discovery" Enabled="true" Target="AssetManagement.NetworkInfrastructureAssetsGroup" ConfirmDelivery="false" Remotable="true" Priority="Normal">
+        <Category>Discovery</Category>
+        <DiscoveryTypes>
+          <DiscoveryRelationship TypeID="InstanceGroup!Microsoft.SystemCenter.InstanceGroupContainsEntities" />
+        </DiscoveryTypes>
+        <DataSource ID="GroupPopulationDataSource" TypeID="SystemCenter!Microsoft.SystemCenter.GroupPopulator">
+          <RuleId>$MPElement$</RuleId>
+          <GroupInstanceId>$MPElement[Name="AssetManagement.NetworkInfrastructureAssetsGroup"]$</GroupInstanceId>
+          <MembershipRules>
+            <MembershipRule>
+              <MonitoringClass>$MPElement[Name="ServerInfrastructureAsset"]$</MonitoringClass>
+              <RelationshipClass>$MPElement[Name="InstanceGroup!Microsoft.SystemCenter.InstanceGroupContainsEntities"]$</RelationshipClass>
+              <Expression>
+                <UnaryExpression>
+                  <ValueExpression>
+                    <Property>$Context/Property[Type='AssetManagementBaseClass']/AssetID$</Property>
+                  </ValueExpression>
+                  <Operator>IsNotNull</Operator>
+                </UnaryExpression>
+              </Expression>
+            </MembershipRule>
+          </MembershipRules>
+        </DataSource>
+      </Discovery>
+      <Discovery ID="AssetManagement.OrdersGroup.Discovery" Enabled="true" Target="AssetManagement.OrdersGroup" ConfirmDelivery="false" Remotable="true" Priority="Normal">
+        <Category>Discovery</Category>
+        <DiscoveryTypes>
+          <DiscoveryRelationship TypeID="InstanceGroup!Microsoft.SystemCenter.InstanceGroupContainsEntities" />
+        </DiscoveryTypes>
+        <DataSource ID="GroupPopulationDataSource" TypeID="SystemCenter!Microsoft.SystemCenter.GroupPopulator">
+          <RuleId>$MPElement$</RuleId>
+          <GroupInstanceId>$MPElement[Name="AssetManagement.OrdersGroup"]$</GroupInstanceId>
+          <MembershipRules>
+            <MembershipRule>
+              <MonitoringClass>$MPElement[Name="OrderBaseClass"]$</MonitoringClass>
+              <RelationshipClass>$MPElement[Name="InstanceGroup!Microsoft.SystemCenter.InstanceGroupContainsEntities"]$</RelationshipClass>
+              <Expression>
+                <UnaryExpression>
+                  <ValueExpression>
+                    <Property>$Context/Property[Type='OrderBaseClass']/OrderNumber$</Property>
+                  </ValueExpression>
+                  <Operator>IsNotNull</Operator>
+                </UnaryExpression>
+              </Expression>
+            </MembershipRule>
+          </MembershipRules>
+        </DataSource>
+      </Discovery>
+      <Discovery ID="AssetManagement.WindowsComputersGroup.Discovery" Enabled="true" Target="AssetManagement.WindowsComputersGroup" ConfirmDelivery="false" Remotable="true" Priority="Normal">
+        <Category>Discovery</Category>
+        <DiscoveryTypes>
+          <DiscoveryRelationship TypeID="InstanceGroup!Microsoft.SystemCenter.InstanceGroupContainsEntities" />
+        </DiscoveryTypes>
+        <DataSource ID="GroupPopulationDataSource" TypeID="SystemCenter!Microsoft.SystemCenter.GroupPopulator">
+          <RuleId>$MPElement$</RuleId>
+          <GroupInstanceId>$MPElement[Name="AssetManagement.WindowsComputersGroup"]$</GroupInstanceId>
+          <MembershipRules>
+            <MembershipRule>
+              <MonitoringClass>$MPElement[Name="Windows!Microsoft.Windows.Computer"]$</MonitoringClass>
+              <RelationshipClass>$MPElement[Name="InstanceGroup!Microsoft.SystemCenter.InstanceGroupContainsEntities"]$</RelationshipClass>
+            </MembershipRule>
+          </MembershipRules>
+        </DataSource>
+      </Discovery>
+      <Discovery ID="AssetManagement.ADUsersGroup.Discovery" Enabled="true" Target="AssetManagement.ADUsersGroup" ConfirmDelivery="false" Remotable="true" Priority="Normal">
+        <Category>Discovery</Category>
+        <DiscoveryTypes>
+          <DiscoveryRelationship TypeID="InstanceGroup!Microsoft.SystemCenter.InstanceGroupContainsEntities" />
+        </DiscoveryTypes>
+        <DataSource ID="GroupPopulationDataSource" TypeID="SystemCenter!Microsoft.SystemCenter.GroupPopulator">
+          <RuleId>$MPElement$</RuleId>
+          <GroupInstanceId>$MPElement[Name="AssetManagement.ADUsersGroup"]$</GroupInstanceId>
+          <MembershipRules>
+            <MembershipRule>
+              <MonitoringClass>$MPElement[Name="Windows!Microsoft.AD.User"]$</MonitoringClass>
+              <RelationshipClass>$MPElement[Name="InstanceGroup!Microsoft.SystemCenter.InstanceGroupContainsEntities"]$</RelationshipClass>
+            </MembershipRule>
+          </MembershipRules>
+        </DataSource>
+      </Discovery>
+    </Discoveries>
+  </Monitoring>
+  <LanguagePacks>
+    <LanguagePack ID="ENG" IsDefault="true">
+      <DisplayStrings>
+        <DisplayString ElementID="AssetManagement">
+          <Name>Asset Management</Name>
+          <Description>Asset Management extensions for System Center Service Manager, providing classes for Peripherals, IPT Phones, Network Infrastructure and more.</Description>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagement.Manufacturer.Enum">
+          <Name>Asset Management - Manufacturer</Name>
+          <Description>Manufacturer List</Description>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagement.Suppliers.Enum">
+          <Name>Asset Management - Suppliers</Name>
+          <Description>Supplier List</Description>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagement.Department.Enum">
+          <Name>Asset Management - Department</Name>
+          <Description>Department List</Description>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagement.Region.Enum">
+          <Name>Asset Management - Region</Name>
+          <Description>Region List</Description>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagement.Country.Enum">
+          <Name>Asset Management - Country</Name>
+          <Description>Country List</Description>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagement.Site.Enum">
+          <Name>Asset Management - Site</Name>
+          <Description>Site List</Description>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagement.Computer.Model.Enum">
+          <Name>Asset Management - Computer Model</Name>
+          <Description>Model List</Description>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagement.Peripheral.Model.Enum">
+          <Name>Asset Management - Peripheral Model</Name>
+          <Description>Model List</Description>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagement.ServerInfrastructure.Model.Enum">
+          <Name>Asset Management - Server Infrastructure Model</Name>
+          <Description>Server Infrastructure Model List</Description>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagement.NetworkInfrastructure.Model.Enum">
+          <Name>Asset Management - Network Infrastructure Model</Name>
+          <Description>Network Infrastructure Model List</Description>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagement.Computer.Category.Enum">
+          <Name>Asset Management - Computer Category</Name>
+          <Description>Computer Category List</Description>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagement.Computer.Type.Enum">
+          <Name>Asset Management - Computer Type</Name>
+          <Description>Computer Type List</Description>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagement.Peripheral.Type.Enum">
+          <Name>Asset Management - Peripheral Type</Name>
+          <Description>Peripheral Type List</Description>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagement.NetworkInfrastructure.Type.Enum">
+          <Name>Asset Management - Network Infrastructure Type</Name>
+          <Description>Network Infrastructure Type List</Description>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagement.ServerInfrastructure.Type.Enum">
+          <Name>Asset Management - Server Infrastructure Type</Name>
+          <Description>Server Infrastructure Type List</Description>
+        </DisplayString>
+        <DisplayString ElementID="System.ConfigItem.AssetStatusEnum.InStock">
+          <Name>In Stock</Name>
+          <Description>In Stock</Description>
+        </DisplayString>
+        <DisplayString ElementID="System.ConfigItem.AssetStatusEnum.Repair">
+          <Name>Repair</Name>
+          <Description>Repair</Description>
+        </DisplayString>
+        <DisplayString ElementID="System.ConfigItem.AssetStatusEnum.Stolen">
+          <Name>Stolen</Name>
+          <Description>Stolen</Description>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementBaseClass">
+          <Name>Asset</Name>
+          <Description>Base class for other asset management items to inherit common items from.</Description>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementBaseClass" SubElementID="AssetID">
+          <Name>Asset ID</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementBaseClass" SubElementID="AssetTag">
+          <Name>Asset Tag</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementBaseClass" SubElementID="SerialNumber">
+          <Name>Serial Number</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementBaseClass" SubElementID="AssetManufacturer">
+          <Name>Asset Manufacturer</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementBaseClass" SubElementID="EquipmentCost">
+          <Name>Equipment Cost</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementBaseClass" SubElementID="GoodsReceivedDate">
+          <Name>Goods Received Date</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementBaseClass" SubElementID="WarrantyExpirationDate">
+          <Name>Warranty Expiration Date</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementBaseClass" SubElementID="WarrantySLA">
+          <Name>Warranty Service Level Agreement Description</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementBaseClass" SubElementID="MaintenanceExpirationDate">
+          <Name>Maintenance Expiration Date</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementBaseClass" SubElementID="MaintenanceContractReferenceNumber">
+          <Name>Maintenance Contract Reference Number</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementBaseClass" SubElementID="Region">
+          <Name>Region</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementBaseClass" SubElementID="Country">
+          <Name>Country</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementBaseClass" SubElementID="Site">
+          <Name>Site</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementBaseClass" SubElementID="Location">
+          <Name>Location</Name>
+        </DisplayString>
+        <DisplayString ElementID="OrderBaseClass">
+          <Name>Order</Name>
+          <Description>Base class for order items to inherit common items from.</Description>
+        </DisplayString>
+        <DisplayString ElementID="OrderBaseClass" SubElementID="OrderNumber">
+          <Name>Order Number</Name>
+        </DisplayString>
+        <DisplayString ElementID="OrderBaseClass" SubElementID="OrderDate">
+          <Name>Order Date</Name>
+        </DisplayString>
+        <DisplayString ElementID="OrderBaseClass" SubElementID="Supplier">
+          <Name>Supplier</Name>
+        </DisplayString>
+        <DisplayString ElementID="OrderBaseClass" SubElementID="Department">
+          <Name>Department</Name>
+        </DisplayString>
+        <DisplayString ElementID="OrderBaseClass" SubElementID="CostCenter">
+          <Name>CostCenter</Name>
+        </DisplayString>
+        <DisplayString ElementID="Peripheral">
+          <Name>Peripheral Asset</Name>
+          <Description>Asset Management - Peripherals</Description>
+        </DisplayString>
+        <DisplayString ElementID="Peripheral" SubElementID="AssetModel">
+          <Name>Asset Model</Name>
+        </DisplayString>
+        <DisplayString ElementID="Peripheral" SubElementID="Type">
+          <Name>Type</Name>
+        </DisplayString>
+        <DisplayString ElementID="ComputerAsset">
+          <Name>Computer Asset</Name>
+          <Description>This class inherits from Asset Management Base Class.</Description>
+        </DisplayString>
+        <DisplayString ElementID="ComputerAsset" SubElementID="AssetModel">
+          <Name>Asset Model</Name>
+        </DisplayString>
+        <DisplayString ElementID="ComputerAsset" SubElementID="Category">
+          <Name>Category</Name>
+        </DisplayString>
+        <DisplayString ElementID="ComputerAsset" SubElementID="Type">
+          <Name>Type</Name>
+        </DisplayString>
+        <DisplayString ElementID="NetworkInfrastructureAsset">
+          <Name>Network Infrastructure Asset</Name>
+          <Description>This class inherits from Asset Management Base Class.</Description>
+        </DisplayString>
+        <DisplayString ElementID="NetworkInfrastructureAsset" SubElementID="AssetModel">
+          <Name>Asset Model</Name>
+        </DisplayString>
+        <DisplayString ElementID="NetworkInfrastructureAsset" SubElementID="Type">
+          <Name>Type</Name>
+        </DisplayString>
+        <DisplayString ElementID="ServerInfrastructureAsset">
+          <Name>Server Infrastructure Asset</Name>
+          <Description>This class inherits from Asset Management Base Class.</Description>
+        </DisplayString>
+        <DisplayString ElementID="ServerInfrastructureAsset" SubElementID="AssetModel">
+          <Name>Asset Model</Name>
+        </DisplayString>
+        <DisplayString ElementID="ServerInfrastructureAsset" SubElementID="Type">
+          <Name>Type</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetToOrderRelationship" SubElementID="Target_OrderNumber">
+          <Name>Target_OrderNumber</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetToOrderRelationship" SubElementID="Source_OrderNumber">
+          <Name>Source_OrderNumber</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetToOrderRelationship">
+          <Name>Relates the Order Base Class to the Asset Management Base Class</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetToComputerAssetRelationship" SubElementID="Source_AssetBase">
+          <Name>Source_AssetBase</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetToComputerAssetRelationship" SubElementID="Target_ComputerAsset">
+          <Name>Target_ComputerAsset</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetToComputerAssetRelationship">
+          <Name>Asset to ComputerAsset</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetToPeripheralRelationship" SubElementID="Source_AssetBase">
+          <Name>Source_AssetBase</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetToPeripheralRelationship" SubElementID="Target_Peripheral">
+          <Name>Target_Peripheral</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetToPeripheralRelationship">
+          <Name>Asset to Peripheral</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetToNetworkInfrastructureAssetRelationship" SubElementID="Source_AssetBase">
+          <Name>Source_AssetBase</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetToNetworkInfrastructureAssetRelationship" SubElementID="Target_NetworkInfrastructureAsset">
+          <Name>Target_NetworkInfrastructureAsset</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetToNetworkInfrastructureAssetRelationship">
+          <Name>Asset to NetworkInfrastructureAsset</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetToServerInfrastructureAssetRelationship" SubElementID="Source_AssetBase">
+          <Name>Source_AssetBase</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetToServerInfrastructureAssetRelationship" SubElementID="Target_ServerInfrastructureAsset">
+          <Name>Target_ServerInfrastructureAsset</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetToServerInfrastructureAssetRelationship">
+          <Name>Asset to ServerInfrastructureAsset</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetToCustodianRelationShip" SubElementID="Target_User">
+          <Name>Target_User</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetToCustodianRelationShip" SubElementID="Source_Asset">
+          <Name>Source_Asset</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetToCustodianRelationShip">
+          <Name>Asset Custodian</Name>
+        </DisplayString>
+        <DisplayString ElementID="ComputerAsset.TypeProjection">
+          <Name>Computer Assets (advanced)</Name>
+          <Description>Defines the properties used in computer asset forms</Description>
+        </DisplayString>
+        <DisplayString ElementID="Order.TypeProjection">
+          <Name>Order</Name>
+          <Description>Defines the properties used in order forms</Description>
+        </DisplayString>
+        <DisplayString ElementID="Peripheral.TypeProjection">
+          <Name>Peripheral Assets (advanced)</Name>
+          <Description>Defines the properties used in peripheral forms</Description>
+        </DisplayString>
+        <DisplayString ElementID="NetworkInfrastructureAsset.TypeProjection">
+          <Name>Network Infrastructure Assets (advanced)</Name>
+          <Description>Defines the properties used in network infrastructure forms</Description>
+        </DisplayString>
+        <DisplayString ElementID="ServerInfrastructureAsset.TypeProjection">
+          <Name>Server Infrastructure Assets (advanced)</Name>
+          <Description>Defines the properties used in server infrastructure forms</Description>
+        </DisplayString>
+        <DisplayString ElementID="Peripheral.Form.TypeProjection">
+          <Name>Peripheral Assets (used in the Peripheral Form)</Name>
+          <Description>Defines the properties of peripherals in the Peripheral Form</Description>
+        </DisplayString>
+        <DisplayString ElementID="NetworkInfraStructureAsset.Form.TypeProjection">
+          <Name>Network Infrastructure Assets (used in the NetworkInfrastructureAsset Form)</Name>
+          <Description>Defines the properties of network infrastructure in the NetworkInfrastructureAsset Form</Description>
+        </DisplayString>
+        <DisplayString ElementID="ServerInfraStructureAsset.Form.TypeProjection">
+          <Name>Server Infrastructure Assets (used in the ServerInfrastructureAsset Form)</Name>
+          <Description>Defines the properties of server infrastructure assets in the ServerInfrastructureAsset Form</Description>
+        </DisplayString>
+        <DisplayString ElementID="GeneralAsset.View.TypeProjection">
+          <Name>General Assets (typical)</Name>
+          <Description>Defines the properties of general assets typically used in views</Description>
+        </DisplayString>
+        <DisplayString ElementID="GeneralAsset_TypeProjection">
+          <Name>General Assets Form</Name>
+          <Description>Defines the properties of general assets used in the Form</Description>
+        </DisplayString>
+        <DisplayString ElementID="Order.View.TypeProjection">
+          <Name>Order Assets (typical)</Name>
+          <Description>Defines the properties of order assets typically used in views</Description>
+        </DisplayString>
+        <DisplayString ElementID="AllComputers.View.ProjectionType">
+          <Name>Computer Assets (typical - used for Asset Management MP)</Name>
+          <Description>Defines the properties of computer assets typically used in views</Description>
+        </DisplayString>
+        <DisplayString ElementID="ComputerAsset.Form.TypeProjection">
+          <Name>Computer Asset (used in the Computer Form)</Name>
+          <Description>Defines the properties of Computer Assets used in the Computer Asset Form.</Description>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagement.AssetsGroup">
+          <Name>Assets</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagement.ComputerAssetsGroup">
+          <Name>Computer Assets</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagement.PeripheralsGroup">
+          <Name>Peripherals</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagement.NetworkInfrastructureAssetsGroup">
+          <Name>Network Infrastructure Assets</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagement.ServerInfrastructureAssetsGroup">
+          <Name>Server Infrastructure Assets</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagement.OrdersGroup">
+          <Name>Orders</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagement.WindowsComputersGroup">
+          <Name>All Windows Computers Group</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagement.ADUsersGroup">
+          <Name>AD Users Group</Name>
+        </DisplayString>
+      </DisplayStrings>
+    </LanguagePack>
+    <LanguagePack ID="ENU" IsDefault="false">
+      <DisplayStrings>
+        <DisplayString ElementID="AssetManagement">
+          <Name>Asset Management</Name>
+          <Description>Asset Management extensions for System Center Service Manager, providing classes for Peripherals, IPT Phones, Network Infrastructure and more.</Description>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagement.Manufacturer.Enum">
+          <Name>Asset Management - Manufacturer</Name>
+          <Description>Manufacturer List</Description>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagement.Suppliers.Enum">
+          <Name>Asset Management - Suppliers</Name>
+          <Description>Supplier List</Description>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagement.Department.Enum">
+          <Name>Asset Management - Department</Name>
+          <Description>Department List</Description>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagement.Region.Enum">
+          <Name>Asset Management - Region</Name>
+          <Description>Region List</Description>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagement.Country.Enum">
+          <Name>Asset Management - Country</Name>
+          <Description>Country List</Description>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagement.Site.Enum">
+          <Name>Asset Management - Site</Name>
+          <Description>Site List</Description>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagement.Computer.Model.Enum">
+          <Name>Asset Management - Computer Model</Name>
+          <Description>Model List</Description>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagement.Peripheral.Model.Enum">
+          <Name>Asset Management - Peripheral Model</Name>
+          <Description>Model List</Description>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagement.ServerInfrastructure.Model.Enum">
+          <Name>Asset Management - Server Infrastructure Model</Name>
+          <Description>Server Infrastructure Model List</Description>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagement.NetworkInfrastructure.Model.Enum">
+          <Name>Asset Management - Network Infrastructure Model</Name>
+          <Description>Network Infrastructure Model List</Description>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagement.Computer.Category.Enum">
+          <Name>Asset Management - Computer Category</Name>
+          <Description>Computer Category List</Description>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagement.Computer.Type.Enum">
+          <Name>Asset Management - Computer Type</Name>
+          <Description>Computer Type List</Description>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagement.Peripheral.Type.Enum">
+          <Name>Asset Management - Peripheral Type</Name>
+          <Description>Peripheral Type List</Description>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagement.NetworkInfrastructure.Type.Enum">
+          <Name>Asset Management - Network Infrastructure Type</Name>
+          <Description>Network Infrastructure Type List</Description>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagement.ServerInfrastructure.Type.Enum">
+          <Name>Asset Management - Server Infrastructure Type</Name>
+          <Description>Server Infrastructure Type List</Description>
+        </DisplayString>
+        <DisplayString ElementID="System.ConfigItem.AssetStatusEnum.InStock">
+          <Name>In Stock</Name>
+          <Description>In Stock</Description>
+        </DisplayString>
+        <DisplayString ElementID="System.ConfigItem.AssetStatusEnum.Repair">
+          <Name>Repair</Name>
+          <Description>Repair</Description>
+        </DisplayString>
+        <DisplayString ElementID="System.ConfigItem.AssetStatusEnum.Stolen">
+          <Name>Stolen</Name>
+          <Description>Stolen</Description>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementBaseClass">
+          <Name>Asset</Name>
+          <Description>Base class for other asset management items to inherit common items from.</Description>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementBaseClass" SubElementID="AssetID">
+          <Name>Asset ID</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementBaseClass" SubElementID="AssetTag">
+          <Name>Asset Tag</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementBaseClass" SubElementID="SerialNumber">
+          <Name>Serial Number</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementBaseClass" SubElementID="AssetManufacturer">
+          <Name>Asset Manufacturer</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementBaseClass" SubElementID="EquipmentCost">
+          <Name>Equipment Cost</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementBaseClass" SubElementID="GoodsReceivedDate">
+          <Name>Goods Received Date</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementBaseClass" SubElementID="WarrantyExpirationDate">
+          <Name>Warranty Expiration Date</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementBaseClass" SubElementID="WarrantySLA">
+          <Name>Warranty Service Level Agreement Description</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementBaseClass" SubElementID="MaintenanceExpirationDate">
+          <Name>Maintenance Expiration Date</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementBaseClass" SubElementID="MaintenanceContractReferenceNumber">
+          <Name>Maintenance Contract Reference Number</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementBaseClass" SubElementID="Region">
+          <Name>Region</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementBaseClass" SubElementID="Country">
+          <Name>Country</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementBaseClass" SubElementID="Site">
+          <Name>Site</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagementBaseClass" SubElementID="Location">
+          <Name>Location</Name>
+        </DisplayString>
+        <DisplayString ElementID="OrderBaseClass">
+          <Name>Order</Name>
+          <Description>Base class for order items to inherit common items from.</Description>
+        </DisplayString>
+        <DisplayString ElementID="OrderBaseClass" SubElementID="OrderNumber">
+          <Name>Order Number</Name>
+        </DisplayString>
+        <DisplayString ElementID="OrderBaseClass" SubElementID="OrderDate">
+          <Name>Order Date</Name>
+        </DisplayString>
+        <DisplayString ElementID="OrderBaseClass" SubElementID="Supplier">
+          <Name>Supplier</Name>
+        </DisplayString>
+        <DisplayString ElementID="OrderBaseClass" SubElementID="Department">
+          <Name>Department</Name>
+        </DisplayString>
+        <DisplayString ElementID="OrderBaseClass" SubElementID="CostCenter">
+          <Name>CostCenter</Name>
+        </DisplayString>
+        <DisplayString ElementID="Peripheral">
+          <Name>Peripheral Asset</Name>
+          <Description>Asset Management - Peripherals</Description>
+        </DisplayString>
+        <DisplayString ElementID="Peripheral" SubElementID="AssetModel">
+          <Name>Asset Model</Name>
+        </DisplayString>
+        <DisplayString ElementID="Peripheral" SubElementID="Type">
+          <Name>Type</Name>
+        </DisplayString>
+        <DisplayString ElementID="ComputerAsset">
+          <Name>Computer Asset</Name>
+          <Description>This class inherits from Asset Management Base Class.</Description>
+        </DisplayString>
+        <DisplayString ElementID="ComputerAsset" SubElementID="AssetModel">
+          <Name>Asset Model</Name>
+        </DisplayString>
+        <DisplayString ElementID="ComputerAsset" SubElementID="Category">
+          <Name>Category</Name>
+        </DisplayString>
+        <DisplayString ElementID="ComputerAsset" SubElementID="Type">
+          <Name>Type</Name>
+        </DisplayString>
+        <DisplayString ElementID="NetworkInfrastructureAsset">
+          <Name>Network Infrastructure Asset</Name>
+          <Description>This class inherits from Asset Management Base Class.</Description>
+        </DisplayString>
+        <DisplayString ElementID="NetworkInfrastructureAsset" SubElementID="AssetModel">
+          <Name>Asset Model</Name>
+        </DisplayString>
+        <DisplayString ElementID="NetworkInfrastructureAsset" SubElementID="Type">
+          <Name>Type</Name>
+        </DisplayString>
+        <DisplayString ElementID="ServerInfrastructureAsset">
+          <Name>Server Infrastructure Asset</Name>
+          <Description>This class inherits from Asset Management Base Class.</Description>
+        </DisplayString>
+        <DisplayString ElementID="ServerInfrastructureAsset" SubElementID="AssetModel">
+          <Name>Asset Model</Name>
+        </DisplayString>
+        <DisplayString ElementID="ServerInfrastructureAsset" SubElementID="Type">
+          <Name>Type</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetToOrderRelationship" SubElementID="Target_OrderNumber">
+          <Name>Target_OrderNumber</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetToOrderRelationship" SubElementID="Source_OrderNumber">
+          <Name>Source_OrderNumber</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetToOrderRelationship">
+          <Name>Relates the Order Base Class to the Asset Management Base Class</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetToComputerAssetRelationship" SubElementID="Source_AssetBase">
+          <Name>Source_AssetBase</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetToComputerAssetRelationship" SubElementID="Target_ComputerAsset">
+          <Name>Target_ComputerAsset</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetToComputerAssetRelationship">
+          <Name>Asset to ComputerAsset</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetToPeripheralRelationship" SubElementID="Source_AssetBase">
+          <Name>Source_AssetBase</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetToPeripheralRelationship" SubElementID="Target_Peripheral">
+          <Name>Target_Peripheral</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetToPeripheralRelationship">
+          <Name>Asset to Peripheral</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetToNetworkInfrastructureAssetRelationship" SubElementID="Source_AssetBase">
+          <Name>Source_AssetBase</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetToNetworkInfrastructureAssetRelationship" SubElementID="Target_NetworkInfrastructureAsset">
+          <Name>Target_NetworkInfrastructureAsset</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetToNetworkInfrastructureAssetRelationship">
+          <Name>Asset to NetworkInfrastructureAsset</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetToServerInfrastructureAssetRelationship" SubElementID="Source_AssetBase">
+          <Name>Source_AssetBase</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetToServerInfrastructureAssetRelationship" SubElementID="Target_ServerInfrastructureAsset">
+          <Name>Target_ServerInfrastructureAsset</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetToServerInfrastructureAssetRelationship">
+          <Name>Asset to ServerInfrastructureAsset</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetToCustodianRelationShip" SubElementID="Target_User">
+          <Name>Target_User</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetToCustodianRelationShip" SubElementID="Source_Asset">
+          <Name>Source_Asset</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetToCustodianRelationShip">
+          <Name>Asset Custodian</Name>
+        </DisplayString>
+        <DisplayString ElementID="ComputerAsset.TypeProjection">
+          <Name>Computer Assets (advanced)</Name>
+          <Description>Defines the properties used in computer asset forms</Description>
+        </DisplayString>
+        <DisplayString ElementID="Order.TypeProjection">
+          <Name>Order</Name>
+          <Description>Defines the properties used in order forms</Description>
+        </DisplayString>
+        <DisplayString ElementID="Peripheral.TypeProjection">
+          <Name>Peripheral Assets (advanced)</Name>
+          <Description>Defines the properties used in peripheral forms</Description>
+        </DisplayString>
+        <DisplayString ElementID="NetworkInfrastructureAsset.TypeProjection">
+          <Name>Network Infrastructure Assets (advanced)</Name>
+          <Description>Defines the properties used in network infrastructure forms</Description>
+        </DisplayString>
+        <DisplayString ElementID="ServerInfrastructureAsset.TypeProjection">
+          <Name>Server Infrastructure Assets (advanced)</Name>
+          <Description>Defines the properties used in server infrastructure forms</Description>
+        </DisplayString>
+        <DisplayString ElementID="Peripheral.Form.TypeProjection">
+          <Name>Peripheral Assets (used in the Peripheral Form)</Name>
+          <Description>Defines the properties of peripherals in the Peripheral Form</Description>
+        </DisplayString>
+        <DisplayString ElementID="NetworkInfraStructureAsset.Form.TypeProjection">
+          <Name>Network Infrastructure Assets (used in the NetworkInfrastructureAsset Form)</Name>
+          <Description>Defines the properties of network infrastructure in the NetworkInfrastructureAsset Form</Description>
+        </DisplayString>
+        <DisplayString ElementID="ServerInfraStructureAsset.Form.TypeProjection">
+          <Name>Server Infrastructure Assets (used in the ServerInfrastructureAsset Form)</Name>
+          <Description>Defines the properties of server infrastructure assets in the ServerInfrastructureAsset Form</Description>
+        </DisplayString>
+        <DisplayString ElementID="GeneralAsset.View.TypeProjection">
+          <Name>General Assets (typical)</Name>
+          <Description>Defines the properties of general assets typically used in views</Description>
+        </DisplayString>
+        <DisplayString ElementID="GeneralAsset_TypeProjection">
+          <Name>General Assets Form</Name>
+          <Description>Defines the properties of general assets used in the Form</Description>
+        </DisplayString>
+        <DisplayString ElementID="Order.View.TypeProjection">
+          <Name>Order Assets (typical)</Name>
+          <Description>Defines the properties of order assets typically used in views</Description>
+        </DisplayString>
+        <DisplayString ElementID="AllComputers.View.ProjectionType">
+          <Name>Computer Assets (typical - used for Asset Management MP)</Name>
+          <Description>Defines the properties of computer assets typically used in views</Description>
+        </DisplayString>
+        <DisplayString ElementID="ComputerAsset.Form.TypeProjection">
+          <Name>Computer Asset (used in the Computer Form)</Name>
+          <Description>Defines the properties of Computer Assets used in the Computer Asset Form.</Description>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagement.AssetsGroup">
+          <Name>Assets Group</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagement.ComputerAssetsGroup">
+          <Name>ComputerAssets Group</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagement.PeripheralsGroup">
+          <Name>Peripherals Group</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagement.NetworkInfrastructureAssetsGroup">
+          <Name>Network Infrastructure Assets Group</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagement.ServerInfrastructureAssetsGroup">
+          <Name>Server Infrastructure Assets Group</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagement.OrdersGroup">
+          <Name>Orders Group</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagement.WindowsComputersGroup">
+          <Name>All Windows Computers Group</Name>
+        </DisplayString>
+        <DisplayString ElementID="AssetManagement.ADUsersGroup">
+          <Name>AD Users Group</Name>
+        </DisplayString>
+      </DisplayStrings>
+    </LanguagePack>
+  </LanguagePacks>
+</ManagementPackFragment>

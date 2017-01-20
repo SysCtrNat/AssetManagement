@@ -1,0 +1,68 @@
+﻿<UserControl  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:scwpf="http://schemas.microsoft.com/SystemCenter/Common/UI/Wpf"
+             x:Class="AssetManagementForms.OrderPreview"
+             mc:Ignorable="d" 
+             d:DesignHeight="800" d:DesignWidth="600">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <TabControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="Auto" Selector.IsSelected="True" SelectionChanged="TabControl_SelectionChanged">
+            <TabItem Header="General" x:Name="tabItemGeneral">
+                <Grid Margin="0,0,0,-2.179">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Row="0" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5">
+                        <Label Content="Order" Height="31" FontWeight="Bold" FontSize="14"/>
+                    </StackPanel>
+                    <StackPanel Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5"/>
+                    <StackPanel Grid.Row="1" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5">
+                        <Label Content="Order Number" />
+                        <TextBox x:Name="OrderNumber" Text="{Binding OrderNumber, Mode=OneWay}" />
+                    </StackPanel>
+                    <StackPanel Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5">
+                        <Label Content="Order Date" />
+                        <TextBox Text="{Binding OrderDate, Mode=OneWay}"/>
+                    </StackPanel>
+                    <StackPanel Grid.Row="2" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5">
+                        <Label Content="Cost Center" />
+                        <TextBox x:Name="CostCenter" Text="{Binding CostCenter, Mode=OneWay}" />
+                    </StackPanel>
+                    <StackPanel Grid.Row="2" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5">
+                        <Label Content="Department" />
+                        <TextBox x:Name="Department" HorizontalAlignment="Stretch" Width="Auto" Text="{Binding Department.DisplayName, Mode=OneWay}"/>
+                    </StackPanel>
+                    <StackPanel Grid.Row="3" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5">
+                        <Label Content="Supplier" />
+                        <TextBox x:Name="Supplier" HorizontalAlignment="Stretch" Width="Auto" Text="{Binding Supplier.DisplayName, Mode=OneWay}"/>
+                    </StackPanel>
+                    <StackPanel Grid.Row="4" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5">
+                        <Label Content="Notes" />
+                        <TextBox x:Name="Notes" Text="{Binding Notes, Mode=OneWay}" Height="118" Margin="0,0,-295,0" />
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+            <!--<TabItem Header="Related Items" x:Name="tabItemRelItems"/>
+            <TabItem Header="History" x:Name="tabItemHistory">
+                <scwpf:HistoryTab/>
+            </TabItem>-->
+        </TabControl>
+    </Grid>
+</UserControl>
